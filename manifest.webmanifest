@@ -1,0 +1,26 @@
+{
+  "name": "أدوية أمي — متابعة الصرف والتحاليل",
+  "short_name": "أدوية أمي",
+  "description": "متابعة مواعيد صرف الأدوية وموافقات التحاليل محليًا على الجهاز",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#f5f7fa",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,1223 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f7fa">
+  <meta name="description" content="متابعة مواعيد صرف الأدوية وموافقات التحاليل محليًا على جهازك">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="أدوية أمي">
+  <title>أدوية أمي | متابعة الصرف</title>
+  <style>
+    :root{--navy:#203348;--ink:#1d2d3f;--muted:#748091;--line:#e7edf2;--bg:#f5f7fa;--white:#fff;--green:#13775e;--greenbg:#e9f7f0;--amber:#a75c00;--amberbg:#fff2de;--rose:#b73544;--rosebg:#ffedf0;--blue:#315f88;--bluebg:#ecf4fc;--sh:0 12px 32px rgba(25,48,73,.055)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;font-size:15px;line-height:1.6;-webkit-tap-highlight-color:transparent}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #9ed2eb;outline-offset:2px}
+    .wrap{max-width:1040px;margin:auto;padding:calc(env(safe-area-inset-top,0px) + 34px) 22px 90px}header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:0 0 28px}.brand{display:flex;align-items:center;gap:13px}.logo{width:53px;height:53px;border-radius:18px;background:#dcedee;display:grid;place-items:center;color:var(--green);box-shadow:0 3px 12px #c8e2e2}.logo svg{width:27px;height:27px}.brand h1{font-size:29px;margin:0;font-weight:800;line-height:1.2;letter-spacing:-.65px}.brand p{color:var(--muted);margin:4px 0 0;font-size:13px}button{border:0} .btn{display:inline-flex;gap:8px;align-items:center;justify-content:center;border-radius:13px;min-height:42px;padding:9px 15px;font-weight:700;white-space:nowrap;transition:transform .12s,background .12s}.btn:active{transform:scale(.98)}.btn-primary{background:var(--green);color:white}.btn-primary:hover{background:#0b624d}.btn-soft{background:#ecf1f4;color:#365066}.btn-soft:hover{background:#e3eaf0}.btn-outline{border:1px solid #dce4e9;background:white;color:#3e5264}.btn-outline:hover{background:#f7fafc}.btn-danger{color:var(--rose);background:#fff1f3}.small{font-size:13px;padding:7px 11px;min-height:35px;border-radius:10px}.btn svg{height:18px;width:18px;flex:none}
+    .hero{background:linear-gradient(120deg,#244e62,#16644f);border-radius:23px;color:white;padding:25px 27px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;overflow:hidden}.hero:before{content:"";width:260px;height:260px;background:rgba(255,255,255,.06);position:absolute;border-radius:50%;left:-65px;top:-150px}.hero>div{position:relative}.eyebrow{font-size:13px;color:#d9e9e7;font-weight:650}.hero h2{margin:5px 0;font-size:26px;line-height:1.4}.hero p{margin:6px 0 0;color:#dbebea;font-size:13px}.hero .btn{background:white;color:#17614f}.hero .btn:hover{background:#f1fbf7}.hero-actions{position:relative;display:flex;flex-wrap:nowrap;gap:8px;align-items:center;justify-content:flex-end}.hero-actions .btn{min-height:36px;padding:7px 11px;border-radius:11px;font-size:12px;gap:6px;flex:0 0 auto}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:17px 0 28px}.stat{background:white;padding:17px 18px;border:1px solid #e8edf1;border-radius:17px;box-shadow:var(--sh)}.stat .n{font-size:30px;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}.stat .label{font-size:12px;color:var(--muted);margin-top:5px}.stat.danger .n{color:var(--rose)}.stat.warning .n{color:var(--amber)}.stat.ok .n{color:var(--green)}.stat{width:100%;font:inherit;color:inherit;text-align:right;cursor:pointer;transition:border-color .16s,box-shadow .16s,transform .12s}.stat:hover{border-color:#c9d8dd}.stat:active{transform:scale(.985)}.stat.active{border:2px solid #176f5c;padding:16px 17px;box-shadow:0 0 0 3px #14765d17, var(--sh)}.stat.active .label{color:#2d5d53;font-weight:800}
+    .section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}.section-heading h2{margin:0;font-size:21px}.section-heading p{margin:2px 0 0;color:var(--muted);font-size:12px}.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:13px}.search{background:white;border:1px solid #dee6ec;border-radius:13px;display:flex;align-items:center;flex:1;min-width:190px;padding:0 13px;gap:9px}.search svg{width:18px;height:18px;color:#8594a2;flex:none}.search input{height:44px;width:100%;border:0;outline:0;background:transparent;color:var(--ink);font-size:16px}.meds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.med{border:1px solid #e6ecef;background:white;border-radius:18px;box-shadow:var(--sh);padding:17px;position:relative;overflow:hidden;min-width:0}.med:before{content:"";position:absolute;right:0;top:14px;bottom:14px;width:4px;border-radius:5px;background:#bbdbd1}.med.overdue:before{background:#d95565}.med.today:before{background:#c4404b}.med.soon:before{background:#e6a448}.med.later:before{background:#abc8d7}.medhead{display:flex;justify-content:space-between;align-items:flex-start;gap:9px;margin-bottom:13px}.med h3{margin:0;font-size:17px;font-weight:800;overflow-wrap:anywhere;line-height:1.5}.note{margin:3px 0 0;color:#758394;font-size:12px;overflow-wrap:anywhere}.status{font-size:12px;white-space:nowrap;border-radius:100px;padding:4px 10px;background:var(--greenbg);color:var(--green);font-weight:750}.status.overdue,.status.today{background:var(--rosebg);color:var(--rose)}.status.soon{background:var(--amberbg);color:var(--amber)}.status.later{background:var(--bluebg);color:var(--blue)}.dates{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0 0 14px}.date{background:#f7f9fb;border-radius:11px;padding:11px;min-width:0}.date label{display:block;color:#788799;font-size:11px;margin-bottom:3px}.date strong{display:block;font-size:14px;font-weight:800;white-space:nowrap}.date.next{background:#eef6f3}.med.overdue .date.next,.med.today .date.next{background:#fff0f2}.med.soon .date.next{background:#fff5e8}.medactions{display:flex;align-items:center;justify-content:space-between;gap:8px}.medactions .btn{flex:1}.medactions .iconbtn{flex:0 0 43px}.empty{text-align:center;padding:38px 15px;background:#fff;border:1px dashed #cbd7e0;border-radius:18px;color:#758394;grid-column:1/-1}
+    .bottom-panel{display:grid;grid-template-columns:1.15fr 1fr;gap:12px;margin-top:26px}.panel{background:white;border:1px solid #e6edf1;border-radius:18px;padding:20px 21px;box-shadow:var(--sh)}.panel h3{margin:0 0 8px;font-size:17px}.panel p{font-size:13px;color:#687a89;line-height:1.9;margin:0 0 12px}.panel .actions{display:flex;flex-wrap:wrap;gap:8px}.hint{margin-top:12px;padding:10px 12px;border-radius:11px;background:#f0f5f8;color:#617688;font-size:12px}.smalltext{font-size:11px;color:#8995a1;margin:16px 2px}.field{display:flex;flex-direction:column;gap:5px;min-width:0}.field label{font-size:13px;font-weight:750}.field input,.field select,.field textarea{width:100%;border:1px solid #dce5eb;color:var(--ink);background:#fff;border-radius:11px;min-height:46px;padding:10px 11px;font-size:16px}.field textarea{min-height:70px;resize:vertical}.field .helper{font-size:11px;color:#8794a1}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.modal{position:fixed;inset:0;z-index:1000;background:rgba(19,34,49,.55);display:flex;align-items:center;justify-content:center;padding:17px;overflow:auto}.modal[hidden]{display:none}.modalbox{max-height:min(90vh,800px);overflow:auto;width:min(100%,510px);background:white;border-radius:21px;padding:23px;box-shadow:0 25px 65px rgba(10,27,41,.28)}.modal-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.modal-title h2{font-size:20px;margin:0}.x{font-size:24px;background:#eef2f6;border-radius:10px;width:36px;height:36px;color:#566b7d;line-height:1}.formgrid{display:grid;gap:13px}.formactions{display:flex;gap:9px;justify-content:flex-end;margin-top:21px;flex-wrap:wrap}.checkbox-line{display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer}.checkbox-line input{width:17px;height:17px;accent-color:var(--green)}.calculated{padding:12px;background:#eef7f1;border:1px solid #d8ece1;border-radius:11px;color:#19684f;font-size:14px;font-weight:700}.history{border-top:1px solid #e8eef1;margin-top:17px;padding-top:14px;font-size:12px;color:#697988}.history h4{margin:0 0 6px;font-size:13px;color:var(--ink)}.history ul{margin:0;padding-right:20px}.warningbar{border-radius:13px;border:1px solid #f3d9a7;background:#fff6e5;color:#885a17;padding:12px 15px;font-size:13px;margin-bottom:13px;line-height:1.7}.toast{position:fixed;bottom:27px;left:50%;transform:translateX(-50%);z-index:2000;background:#253d4d;color:white;box-shadow:0 10px 32px #172b3b38;border-radius:12px;padding:11px 18px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .18s;max-width:min(90vw,550px);text-align:center}.toast.show{opacity:1}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.noscroll{overflow:hidden}.footnote{color:#8a99a6;font-size:12px;margin-top:19px;text-align:center} 
+    @media(max-width:760px){.wrap{padding:calc(env(safe-area-inset-top,0px) + 28px) 14px 70px}header{margin-bottom:18px}.brand h1{font-size:24px}.brand p{font-size:12px}.logo{width:47px;height:47px}.hero{padding:21px 18px;align-items:stretch;flex-direction:column;gap:13px}.hero h2{font-size:22px}.hero .btn{align-self:auto}.hero-actions{justify-content:flex-start;flex-wrap:nowrap;gap:7px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}.hero-actions .btn{font-size:11px;min-height:34px;padding:6px 9px;border-radius:10px;flex:0 0 auto}.stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:12px 0 24px}.stat{border-radius:13px;padding:12px 7px;text-align:center}.stat.active{padding:11px 6px}.stat .n{font-size:25px}.stat .label{font-size:10px}.meds{grid-template-columns:1fr}.bottom-panel{grid-template-columns:1fr}.med{padding:17px}.section-heading h2{font-size:20px}}
+    @media(max-width:370px){.brand h1{font-size:22px}.headerbtn{padding:9px 10px;font-size:12px}.stat .n{font-size:22px}.stat .label{font-size:9px}.dates{gap:6px}.date{padding:9px 8px}.date strong{font-size:12px}.med h3{font-size:16px}.two{grid-template-columns:1fr}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+    @media print{.wrap{padding:5mm}header button,.medactions,.toolbar,.bottom-panel,.hero button{display:none!important}.hero{background:none;color:black;border:1px solid #aaa}.hero p,.eyebrow{color:black}.meds{grid-template-columns:repeat(2,1fr)}.med{break-inside:avoid;box-shadow:none}}
+  
+    /* عرض وحفظ صورة بطاقات الأدوية من داخل نفس ملف HTML (متوافق مع العرض المحلي على الآيفون). */
+    .image-view{position:fixed;inset:0;z-index:1200;background:#edf2f5;display:flex;flex-direction:column;overflow:hidden}
+    .image-view[hidden]{display:none}
+    .image-toolbar{background:white;border-bottom:1px solid #dfe7ec;padding:12px max(14px,env(safe-area-inset-right)) 12px max(14px,env(safe-area-inset-left));display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;flex:none}
+    .image-toolbar-title{font-size:15px;font-weight:800}
+    .image-toolbar-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .image-scroll{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;padding:16px 12px max(28px,env(safe-area-inset-bottom));text-align:center}
+    .image-guide{font-size:12px;color:#596d7d;line-height:1.8;max-width:750px;margin:0 auto 12px}
+    .image-preview{display:block;width:100%;max-width:750px;height:auto;margin:0 auto;background:white;box-shadow:0 10px 36px rgba(25,48,73,.10);border-radius:9px;object-fit:contain;-webkit-user-select:none;user-select:none;-webkit-touch-callout:default}
+    .image-toolbar .btn{min-height:38px;font-size:12px;padding:7px 10px}
+    .image-toolbar .btn[hidden]{display:none}
+    @media(max-width:480px){.image-toolbar{align-items:flex-start}.image-toolbar-title{width:100%}.image-toolbar-actions{width:100%;justify-content:flex-start}}
+
+
+    /* معاينة وتصدير التقويم داخل نفس الملف المحلي دون نوافذ منبثقة */
+    .cal-view{position:fixed;inset:0;z-index:1250;background:#f3f6f8;display:flex;flex-direction:column;overflow:hidden}
+    .cal-view[hidden]{display:none}
+    .cal-top{background:#fff;border-bottom:1px solid #e2e9ef;padding:13px max(15px,env(safe-area-inset-right));display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+    .cal-top h2{font-size:17px;margin:0}.cal-top .btn{min-height:38px}
+    .cal-body{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;padding:16px max(15px,env(safe-area-inset-right)) max(28px,env(safe-area-inset-bottom))}
+    .cal-content{max-width:750px;margin:auto}
+    .cal-explain,.cal-help{background:#fff;border:1px solid #e5ecf1;border-radius:15px;padding:15px 16px;margin-bottom:12px;font-size:13px;line-height:1.85;color:#516575}
+    .cal-explain strong{color:#203348}.cal-actionbar{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0 10px}
+    .cal-actionbar .btn{text-decoration:none;min-height:44px}.cal-event-list{display:grid;gap:8px}
+    .cal-day{background:#fff;border:1px solid #e3eaee;border-radius:15px;padding:13px 15px}
+    .cal-day h3{margin:0 0 7px;color:#203348;font-size:14px}.cal-day ul{margin:0;padding-right:22px;font-size:13px;color:#4b5c6c;line-height:1.9}
+    .cal-late{color:#b73544;font-weight:750;font-size:11px}.cal-reliability{font-size:12px;color:#8b5a1b;background:#fff6e5;border:1px solid #f0dcad;border-radius:11px;padding:10px 12px;margin-top:12px}
+    @media(max-width:480px){.cal-top h2{width:100%}.cal-actionbar .btn{flex:1 1 100%}}
+
+    /* استيراد موافقات التأمين: يعمل داخل نفس ملف HTML المحلي. */
+    .ap-view{position:fixed;inset:0;z-index:1400;background:#f3f6f8;display:flex;flex-direction:column;overflow:hidden}.ap-view[hidden]{display:none}
+    .ap-top{background:#fff;border-bottom:1px solid #e2e9ef;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none}.ap-top h2{margin:0;font-size:18px}
+    .ap-scroll{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;padding:15px 13px max(35px,env(safe-area-inset-bottom))}.ap-inner{max-width:760px;margin:auto}
+    .ap-panel{border:1px solid #e2eaf0;background:#fff;border-radius:17px;padding:16px;margin-bottom:13px;box-shadow:var(--sh)}
+    .ap-panel h3{font-size:16px;margin:0 0 7px}.ap-desc{font-size:13px;color:#607386;line-height:1.9;margin:2px 0 11px}.ap-actions{display:flex;flex-wrap:wrap;gap:9px;margin:9px 0}
+    .ap-actions .btn{white-space:normal;text-align:center}.ap-image{display:block;max-width:100%;max-height:290px;object-fit:contain;margin:10px auto;border-radius:11px;border:1px solid #dce6ea}.ap-image[hidden]{display:none}
+    .ap-text{width:100%;min-height:110px;border:1px solid #d6e2e9;border-radius:12px;padding:11px;font-size:15px;background:#f9fbfc;color:#223449;resize:vertical}
+    .ap-caution{padding:10px 13px;border:1px solid #f0ddb2;background:#fff7e8;color:#79531f;border-radius:12px;font-size:13px;line-height:1.8;margin:12px 0}
+    .ap-good{padding:10px 13px;border:1px solid #c7e3d6;background:#eef8f2;color:#236b51;border-radius:12px;font-size:13px;line-height:1.8;margin:12px 0}
+    .ap-row{border:1px solid #e2e9ee;background:white;padding:13px;border-radius:13px;margin:10px 0}.ap-row-title{font-size:15px;font-weight:800;line-height:1.6}
+    .ap-flag{font-size:12px;border-radius:8px;padding:2px 8px;background:#e8f4ef;color:#146d51;display:inline-block;margin:3px 0 8px}.ap-flag.partial{background:#fff1dc;color:#97600c}.ap-flag.rejected{background:#ffeef0;color:#aa3442}
+    .ap-meta{color:#667888;font-size:12px;line-height:1.8}.ap-row .two{margin-top:10px}.ap-row label{font-size:12px;color:#4b5f72}.ap-row .field input,.ap-row .field select{min-height:41px;font-size:14px}
+    .ap-check{display:flex;align-items:flex-start;gap:8px;margin-top:10px;line-height:1.7;font-size:13px}.ap-check input{flex:0 0 18px;width:18px;height:18px;accent-color:#15775c;margin-top:3px}
+    .ap-summary{color:#4a6074;font-size:13px;line-height:2}.ap-summary strong{color:#23374a}.ap-save{position:sticky;bottom:0;background:#fff;border-top:1px solid #e1e9ee;padding:12px 15px;z-index:1;display:flex;justify-content:center;gap:8px}
+    .ap-save .btn{width:min(100%,680px)}.ap-disabled{opacity:.65}.ap-foot{font-size:12px;color:#6a7d8d;line-height:1.8}.ap-need{color:#a34d23;font-size:12px;font-weight:700}
+    @media(max-width:480px){.ap-actions .btn{flex:1 1 100%}.ap-top h2{font-size:16px}.ap-row .two{gap:7px}}
+
+  [hidden]{display:none!important}.category-tabs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0 0 16px;padding:6px;background:#e9eff1;border-radius:18px}
+  .category-tab{border:1px solid transparent;padding:12px 10px;border-radius:13px;background:transparent;color:#526679;font-weight:800;font-size:15px;transition:.15s}
+  .category-tab.active{background:#fff;color:#176b57;border-color:#d4e6df;box-shadow:0 3px 10px rgba(25,48,73,.075)}
+  .category-tab span{font-size:12px;font-weight:600;color:#718392;margin-right:3px}
+  .lab-period{font-size:12px;color:#6c8090;margin-top:1px}
+  .lab-warning{padding:10px 12px;border-radius:11px;background:#fff6e5;color:#86571b;font-size:12px;line-height:1.8}
+  .med[data-record-id]{cursor:pointer;transition:border-color .12s,transform .12s}.med[data-record-id]:active{transform:scale(.992)}.med[data-record-id]:focus-visible{outline:3px solid #91cbbb;outline-offset:2px}.open-history{font-size:12px;font-weight:750;color:#287661;margin:-4px 1px 12px}
+  .timeline-intro{font-size:13px;color:#688094;margin:0 0 15px;line-height:1.8}.timeline{position:relative;display:grid;gap:12px}.timeline-item{border:1px solid #e2eaee;border-right:4px solid #b7dacf;padding:13px;border-radius:12px;background:#fff}.timeline-item.current{border-right-color:#13775e;background:#f4faf7}.timeline-item.approval-only{border-right-color:#e6a448}.timeline-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}.timeline-date{font-weight:800;font-size:15px;color:#1d2d3f}.timeline-kind{font-size:11px;border-radius:20px;background:#e8f4ef;color:#176b57;padding:3px 10px;font-weight:750}.timeline-item.approval-only .timeline-kind{background:#fff0db;color:#9b5d13}.timeline-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.timeline-fields>div{background:#f5f8fa;padding:9px 10px;border-radius:9px;min-width:0}.timeline-fields label{display:block;font-size:11px;color:#7c8a97}.timeline-fields strong{display:block;overflow-wrap:anywhere;font-size:13px;color:#1e3446}.timeline-item .timeline-note{margin:10px 0 0;font-size:12px;color:#63778a;line-height:1.7;overflow-wrap:anywhere}.timeline-empty{background:#f4f8fa;border-radius:12px;padding:14px;color:#6c7f8e;font-size:13px}
+
+    .supply-panel{border:1px solid #d8e8e2;background:#f7fbf9;padding:12px;border-radius:13px;display:grid;gap:11px}
+    .supply-panel .field label{font-size:12px}.supply-hint{font-size:12px;color:#546e66;line-height:1.7}.supply-verify{padding:8px 10px;background:#fff6e6;border:1px solid #f3dfb6;border-radius:9px;color:#8b5c17;font-size:12px;line-height:1.8}
+    .supply-preview{padding:10px 12px;border:1px solid #b7ded0;background:#e9f7f0;color:#145f4a;border-radius:11px;font-size:13px;font-weight:750;line-height:1.8}
+    .supply-mode{margin-bottom:2px}.quantity-params{display:grid;gap:10px}.field .supply-help{font-size:11px;color:#667c8c;font-weight:400}
+    .ap-supply{background:#f6faf7;border-radius:10px;padding:10px;margin-top:10px;border:1px solid #dcebe1}.ap-supply .two{margin-top:8px}.ap-supply label{font-size:12px}
+
+  /* إعدادات مختصرة، ومفاتيح طريقة حساب بدل القائمة المنسدلة */
+  .calc-switch{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
+  .calc-option{position:relative;display:block;cursor:pointer;min-width:0}
+  .calc-option input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+  .calc-option span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:43px;line-height:1.5;padding:9px 6px;border:1px solid #d6e2e8;border-radius:11px;color:#4a6275;background:#f6f9fa;font-size:13px;font-weight:750}
+  .calc-option input:checked+span{background:#e5f5ed;border:2px solid #13775e;color:#12634e;padding:8px 5px}
+  .calc-option input:focus-visible+span{outline:3px solid #89c6ae;outline-offset:2px}
+  .settings-panels{display:grid;gap:12px;margin-top:18px}
+  .settings-panels .panel{padding:16px;box-shadow:none}
+  .settings-panels .actions{display:flex;flex-wrap:wrap;gap:8px}
+  .history-edit-btn{font-size:12px;min-height:30px;padding:4px 10px;border-radius:9px;background:#e8f3ef;color:#17624d;border:1px solid #d2e5df;font-weight:800}
+  .history-edit-btn:focus-visible{outline:2px solid #13775e}
+  .history-editor-hint{font-size:12px;line-height:1.8;color:#647d8b;background:#f1f6f7;padding:10px;border-radius:11px}
+  .section-heading{margin-bottom:12px}
+
+
+    /* GitHub Pages PWA: upper controls stay visible while the records scroll. */
+    .wrap{padding-top:0}
+    .sticky-head{position:sticky;top:0;z-index:100;background:var(--bg);padding-top:calc(env(safe-area-inset-top,0px) + 10px);padding-bottom:9px;box-shadow:0 6px 14px rgba(25,48,73,.035)}
+    .sticky-head header{margin-bottom:9px}
+    .sticky-head .category-tabs{margin-bottom:8px;padding:4px;border-radius:13px;gap:5px}
+    .sticky-head .category-tab{padding:7px 9px;border-radius:10px;font-size:13px}
+    .hero-compact{padding:10px 12px;border-radius:15px;min-height:55px;display:block}
+    .hero-compact:before{width:130px;height:130px;top:-95px;left:-15px}
+    .hero-compact .hero-actions{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px;overflow:visible;padding:0}
+    .hero-compact .hero-actions .btn{min-width:0;width:100%;white-space:normal;min-height:35px;font-size:12px;line-height:1.35;padding:7px 6px}
+    .hero-compact .hero-actions .btn[hidden]{display:none}
+    .hero-compact .hero-actions:has(> .btn[hidden]){grid-template-columns:1fr}
+    .sticky-head .stats{margin:8px 0 0;gap:8px}
+    .sticky-head .stat{padding:10px 8px;min-width:0}
+    .sticky-head .stat.active{padding:9px 7px}
+    .sticky-head .stat .n{font-size:25px}
+    .sticky-head .stat .label{font-size:10px;line-height:1.3}
+    .section-heading{margin-top:18px}
+    @media(max-width:760px){
+      .wrap{padding-top:0}
+      .sticky-head{padding-top:calc(env(safe-area-inset-top,0px) + 9px);padding-bottom:8px}
+      .sticky-head header{margin-bottom:8px;gap:9px}
+      .sticky-head .brand{gap:8px}
+      .sticky-head .brand h1{font-size:21px}
+      .sticky-head .brand p{font-size:11px;margin-top:0}
+      .sticky-head .logo{width:40px;height:40px;border-radius:13px}
+      .sticky-head .logo svg{width:23px;height:23px}
+      .sticky-head .headerbtn{min-height:34px;padding:6px 10px;font-size:12px}
+      .sticky-head .category-tabs{margin-bottom:7px}
+      .hero-compact{padding:9px 10px;min-height:51px;flex-direction:row}
+      .sticky-head .stats{gap:6px;margin-top:7px}
+      .sticky-head .stat{padding:9px 3px}
+      .sticky-head .stat.active{padding:8px 2px}
+      .sticky-head .stat .n{font-size:22px}
+      .sticky-head .stat .label{font-size:9px;line-height:1.35}
+      .section-heading{margin-top:15px}
+      .toolbar{gap:8px}
+      .toolbar>.btn{padding:8px 10px;min-height:43px;font-size:12px}
+      .toolbar .search{min-width:125px}
+    }
+    @media(max-width:370px){
+      .hero-compact .hero-actions .btn{font-size:11px;padding:6px 3px}
+      .sticky-head .brand h1{font-size:19px}
+      .sticky-head .stat .n{font-size:20px}
+    }
+    @media print{.sticky-head{position:static;box-shadow:none}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sticky-head" id="stickyHead">
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3.5" y="8.5" width="17" height="8" rx="4" transform="rotate(-40 12 12.5)"/><path d="m9 8 6.3 7.6"/></svg></div>
+      <div><h1>أدوية أمي</h1><p id="brandSubtitle">متابعة مواعيد إعادة صرف الأدوية</p></div>
+    </div>
+    <button class="btn btn-outline headerbtn" type="button" data-action="settings">⚙ الإعدادات</button>
+  </header>
+  <nav class="category-tabs" aria-label="نوع المتابعة">
+    <button type="button" class="category-tab active" data-category="meds" aria-pressed="true">💊 الأدوية <span id="tabMedCount"></span></button>
+    <button type="button" class="category-tab" data-category="labs" aria-pressed="false">🧪 التحاليل <span id="tabLabCount"></span></button>
+  </nav>
+  <div id="storageBanner" class="warningbar" hidden>تعذّر حفظ البيانات على هذا المتصفح. استخدم نسخة احتياطية JSON بعد كل تعديل، وافتح التطبيق من متصفح يسمح بالتخزين المحلي.</div>
+  <section class="hero hero-compact" aria-label="أدوات المتابعة السريعة">
+    <div class="hero-actions">
+      <button type="button" class="btn" data-action="imagepage">🖼 حفظ صورة</button>
+      <button type="button" class="btn" id="insuranceImportButton" data-action="approval">▣ استيراد الموافقة</button>
+    </div>
+  </section>
+  <section class="stats" aria-label="تصفية الأدوية حسب موعد الصرف">
+    <button type="button" class="stat active" data-filter="all" aria-pressed="true"><div id="countAll" class="n">—</div><div class="label">إجمالي الأدوية</div></button>
+    <button type="button" class="stat danger" data-filter="late" aria-pressed="false"><div id="countLate" class="n">—</div><div class="label">متأخر / اليوم</div></button>
+    <button type="button" class="stat warning" data-filter="soon" aria-pressed="false"><div id="countSoon" class="n">—</div><div class="label">خلال ٧ أيام</div></button>
+    <button type="button" class="stat ok" data-filter="later" aria-pressed="false"><div id="countLater" class="n">—</div><div class="label">بعد ٧ أيام</div></button>
+  </section>
+  </div><!-- /sticky-head -->
+  <div class="section-heading">
+    <div><h2 id="listTitle">قائمة الأدوية</h2></div>
+  </div>
+  <div class="toolbar"><label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="search" type="search" aria-label="البحث عن دواء أو تحليل" placeholder="ابحث عن دواء..."></label>
+    <button type="button" class="btn btn-primary" data-action="add">＋ إضافة دواء</button>
+  </div>
+  <main id="meds" class="meds" aria-live="polite"></main>
+  <p class="footnote">مواعيد صرف الأدوية والمتابعة الإدارية للتحاليل • التواريخ ميلادية • موعد التحليل الفعلي يحدده الطبيب</p>
+</div>
+
+
+
+
+<div id="approvalView" class="ap-view" role="dialog" aria-modal="true" aria-labelledby="approvalTitle" hidden>
+  <div class="ap-top"><h2 id="approvalTitle">استيراد موافقات التأمين</h2><button class="btn btn-soft small" type="button" data-action="closeapproval">✕ إغلاق</button></div>
+  <div class="ap-scroll"><div class="ap-inner">
+    <section class="ap-panel">
+      <h3>① صورة الموافقة أو النص المنسوخ</h3>
+      <p class="ap-desc">اختَر صورة من «الصور» أو «الملفات»، أو اضغط «لصق من الحافظة» بعد نسخها. التطبيق يحاول التعرف على النص آليًا إذا كان المتصفح يدعم ذلك. في الآيفون، غالبًا تحتاج «النص الحي Live Text» من تطبيق الصور ← نسخ الكل ← لصق هنا. لا تُرسل الصورة إلى أي خادم.</p>
+      <div class="ap-actions"><button type="button" class="btn btn-primary" data-action="pickapproval">▣ اختيار لقطة شاشة</button><button type="button" class="btn btn-outline" data-action="pasteapproval">⧉ لصق من الحافظة</button></div>
+      <input id="approvalFile" type="file" accept="image/*" hidden>
+      <img id="approvalPreview" class="ap-image" alt="لقطة موافقة التأمين" hidden>
+      <p class="ap-desc" id="approvalOCRStatus">الصور القديمة المرفقة في المحادثة للشرح فقط؛ لا تُحمّل تلقائيًا في التطبيق.</p>
+      <label for="approvalText" class="label">النص المنسوخ من الموافقة</label>
+      <textarea id="approvalText" class="ap-text" dir="auto" placeholder="الصق النص باستخدام Live Text من الصورة: أسماء الأدوية، 3 من 3، الموافقة رقم ... إلخ"></textarea>
+      <div class="ap-actions"><button class="btn btn-primary" type="button" data-action="analyzeapproval">🔍 تحليل الأدوية والموافقة</button></div>
+    </section>
+    <section class="ap-panel" id="approvalResults" hidden>
+      <h3>② مراجعة النتائج قبل الحفظ</h3>
+      <div class="ap-caution">الموافقة ليست إثبات صرف. لن نغيّر «آخر صرف» أو «الصرف القادم» إلا للأدوية التي تؤكد بنفسك استلامها. الأدوية غير الموافق عليها لا تُحدَّث.</div>
+      <div class="two">
+        <div class="field"><label for="approvalNumber">رقم الموافقة (إن وجد)</label><input type="text" id="approvalNumber" inputmode="numeric" maxlength="30" placeholder="غير ظاهر في بعض الصور"></div>
+        <div class="field"><label for="approvalDate">تاريخ الموافقة (ميلادي)</label><input type="date" id="approvalDate"></div>
+      </div>
+      <div class="field" style="margin-top:11px"><label for="approvalReceipt">تاريخ الاستلام الفعلي للأدوية المحددة</label><input type="date" id="approvalReceipt"><span class="helper">اليوم قيمة أولية قابلة للتعديل؛ لا يعتبر تاريخ الموافقة تاريخ صرف تلقائيًا.</span></div>
+      <div id="approvalRows"></div>
+      <div class="ap-foot">الموافقات الجزئية تحتاج مراجعة الكمية المستلمة. إذا أكدت الاستلام وأدخلت عدد العلب والوحدات ومعدل الاستخدام، يُحسب موعد المتابعة منها. لا نعتبر الموافقة دليلًا على الصرف، ولا نغيّر جرعة العلاج.</div>
+    </section>
+  </div></div>
+  <div class="ap-save" id="approvalSaveBar" hidden><button type="button" class="btn btn-primary" data-action="saveapproval">✓ حفظ الموافقات وتحديث الأدوية المستلمة فقط</button></div>
+</div>
+
+<div id="calView" class="cal-view" role="dialog" aria-modal="true" aria-labelledby="calViewTitle" hidden>
+  <div class="cal-top">
+    <h2 id="calViewTitle">مواعيد التقويم</h2>
+    <button type="button" class="btn btn-soft" data-action="closecalendar">✕ إغلاق</button>
+  </div>
+  <div class="cal-body"><div class="cal-content">
+    <div class="cal-explain">
+      <strong>الخطوة الأولى: مشاركة ملف المواعيد</strong>
+      <div>اضغط «مشاركة ملف التقويم» ثم اختر «حفظ في الملفات» أو تطبيق Mail لإرساله لنفسك. ملف <b>ICS</b> يحتوي مواعيد الأدوية وتنبيهاتها؛ إنشاء الملف لا يعني إضافته تلقائيًا للتقويم.</div>
+      <div class="cal-actionbar">
+        <button type="button" class="btn btn-primary" data-action="sharecalendar">↗ مشاركة ملف التقويم</button>
+        <a id="calendarDownloadLink" class="btn btn-outline" data-action="downloadcalendar" download="mawaeed-sarf-adwiyat-ummi.ics">⇩ حفظ ملف ICS</a>
+      </div>
+      <div>بعد وصول الملف إلى جهازك، افتحه من <b>Apple Mail</b> وجرب خيار «إضافة الكل» إذا ظهر. بعض طرق فتح HTML من «الملفات» لا تدعم مشاركة ملف التقويم، لذلك وفرنا البدائل أدناه.</div>
+    </div>
+    <div class="cal-help"><strong>البديل المضمون: المواعيد مكتوبة أمامك</strong>
+      <div>إذا لم يستورد الآيفون الملف، افتح تطبيق التقويم وأضف المواعيد يدويًا من القائمة التالية. يمكنك أيضًا نسخ القائمة دفعة واحدة.</div>
+      <div class="cal-actionbar"><button type="button" class="btn btn-outline small" data-action="copycalendar">نسخ قائمة المواعيد</button></div>
+    </div>
+    <div id="calendarEventList" class="cal-event-list"></div>
+    <p class="cal-reliability">التنبيهات في ICS: قبل ٧ أيام و٣ أيام ويوم الصرف، الساعة ٩ صباحًا. راجع المواعيد قبل استيرادها، واحذف الأحداث القديمة عند إعادة التصدير حتى لا تتكرر التذكيرات.</p>
+  </div></div>
+</div>
+
+<div id="imageView" class="image-view" role="dialog" aria-modal="true" aria-label="معاينة حفظ الأدوية كصورة" hidden>
+  <div class="image-toolbar">
+    <span class="image-toolbar-title" id="imageViewTitle">صورة بطاقات الأدوية</span>
+    <div class="image-toolbar-actions">
+      <button type="button" class="btn btn-primary" data-action="shareimage">↗ مشاركة / حفظ الصورة</button>
+      <a id="imageDownloadLink" class="btn btn-outline" download="adwiyat-ummi.png">⇩ تنزيل PNG</a>
+      <button type="button" class="btn btn-soft" data-action="closeimage">إغلاق</button>
+    </div>
+  </div>
+  <div class="image-scroll">
+    <p class="image-guide">الصورة تشمل كل البطاقات الظاهرة حسب الفلتر والبحث. على الآيفون اضغط «مشاركة / حفظ الصورة» أو اضغط مطولًا على الصورة واختر حفظ الصورة.</p>
+    <img id="imagePreview" class="image-preview" alt="صورة موحدة تحتوي على جميع بطاقات الأدوية الظاهرة" />
+  </div>
+</div>
+
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalHeading" hidden>
+ <div class="modalbox">
+  <div class="modal-title"><h2 id="modalHeading"></h2><button type="button" class="x" aria-label="إغلاق" data-action="close">×</button></div>
+  <div id="modalContent"></div>
+ </div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+<script>
+(() => {
+  'use strict';
+  const KEY='mama-refill-app-v1';
+  const $=s=>document.querySelector(s);
+  const msday=86400000;
+  const initial=[]; // Public GitHub Pages build: private records are imported by the user, never published.
+  let medicines=[],labs=[],activeCategory='meds',activeFilter='all',editing=null,mode='',modalFocus=null,notificationDays=7,toastTimer;
+  let canStore=true;
+  try { localStorage.setItem('__refilltest','1');localStorage.removeItem('__refilltest'); }catch(e){canStore=false;$('#storageBanner').hidden=false}
+  function toDate(str){ if(!/^\d{4}-\d{2}-\d{2}$/.test(String(str||'')))return null;const [y,m,d]=str.split('-').map(Number);let dt=new Date(y,m-1,d);return(dt.getFullYear()===y&&dt.getMonth()===m-1&&dt.getDate()===d)?dt:null }
+  function iso(d){return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
+  function today(){return iso(new Date())}
+  function addDuration(s,n,u){const d=toDate(s);if(!d)return '';if(u==='months'){const originalDay=d.getDate();const target=new Date(d.getFullYear(),d.getMonth()+Number(n),1);const lastDay=new Date(target.getFullYear(),target.getMonth()+1,0).getDate();target.setDate(Math.min(originalDay,lastDay));return iso(target)}d.setDate(d.getDate()+Number(n)*(u==='weeks'?7:1));return iso(d)}
+  // وصف العبوات من صور موافقات التأمين، وتكرار الاستخدام من الوصفة المصورة.
+  // المعلومات مرجعية للمساعدة في إدخال الصرف؛ لا تغيّر جرعة المريض، ولا تثبت الاستلام.
+  const supplyPresets=[
+    {re:/\bEXFORGE\b|\bLOTEVAN\b/i,box:28,use:1,period:1,label:'حبة',source:'28 حبة في العلبة وفق صورة التأمين؛ مرة يوميًا في الوصفة'},
+    {re:/\bSYNJARDY\b/i,box:60,use:2,period:1,label:'حبة',source:'60 حبة في العلبة؛ مرتان يوميًا وفق الوصفة'},
+    {re:/\bJOINT\s?ACE\b/i,box:60,use:2,period:1,label:'حبة',source:'60 حبة في العلبة؛ مرتان يوميًا وفق الوصفة المصوّرة (Glucosamine)'},
+    {re:/\bD[\s-]?CURA\b/i,box:4,use:1,period:7,label:'أمبولة',source:'4 أمبولات في العلبة؛ مرة أسبوعيًا حسب المدة السابقة، تأكد من الوصفة'},
+    {re:/\bCOBAL\b/i,box:30,use:1,period:1,label:'حبة',source:'30 حبة في العلبة؛ B12 مرة يوميًا وفق الوصفة'},
+    {re:/\bCLAZ\b|\bGLICLAZIDE\b/i,box:30,use:1,period:1,label:'حبة',source:'30 حبة في العلبة؛ مرة يوميًا وفق الوصفة'},
+    {re:/\bIVARIN\b|\bCRESTOR\b|\bROZAVI\b|\bROSUVASTATIN\b/i,box:30,use:1,period:1,label:'حبة',source:'30 حبة في العلبة؛ مرة يوميًا وفق الوصفة'},
+    {re:/\bGLERAN\b|\bACTOS\b|\bPIOGLITAZONE\b/i,box:30,use:1,period:1,label:'حبة',source:'30 حبة في العلبة؛ مرة يوميًا وفق الوصفة'},
+    {re:/\bOSTEOCARE\b/i,box:30,use:1,period:1,label:'حبة',source:'30 حبة في العلبة؛ جرعة الاستخدام تحتاج تأكيدًا من العبوة أو الوصفة'},
+    {re:/\bMEVA\b|\bDUSPATALIN(?:E)?\b|\bMEBEVERINE\b/i,box:null,use:1,period:1,label:'كبسولة',source:'الوصفة المصوّرة: مرة يوميًا؛ عدد الكبسولات في العبوة غير موضح ويحتاج تأكيدًا'},
+    {re:/\bOZEMPIC\b|\bSEMAGLUTIDE\b/i,box:null,use:1,period:7,label:'جرعة',source:'الوصفة المصوّرة: حقنة أسبوعيًا؛ عدد الجرعات في القلم غير محدد هنا وتركيز الوصفة قد يختلف عن الموافقة'},
+    {re:/الحساس|\bSENSOR\b/i,box:null,use:null,period:null,label:'قطعة',source:'مدة صلاحية الحساس تختلف حسب نوعه؛ استخدم المدة اليدوية حتى تتأكد من النوع'}
+  ];
+  function presetFor(name){return supplyPresets.find(p=>p.re.test(String(name||'')))||null}
+  function positiveNum(n){return Number.isFinite(Number(n))&&Number(n)>0?Number(n):null}
+  function supplyDays(x){const packs=positiveNum(x.packCount),box=positiveNum(x.packSize),use=positiveNum(x.unitsPerInterval),period=positiveNum(x.intervalDays);
+    if(!packs||!box||!use||!period)return null;
+    const days=Math.floor((packs*box/use)*period+1e-8);
+    return days>=1&&days<=36500?days:null;
+  }
+  function packDefaults(m){const preset=presetFor(m.name),saved=positiveNum(m.packSize);
+    return {packCount:positiveNum(m.packCount)||'',packSize:saved||preset?.box||'',unitsPerInterval:positiveNum(m.unitsPerInterval)||preset?.use||'',intervalDays:positiveNum(m.intervalDays)||preset?.period||'',packUnit:m.packUnit||preset?.label||'حبة',source:preset?.source||'لا توجد بيانات مؤكدة للعبوة؛ أدخل بيانات الوصفة والعبوة الفعلية.'};
+  }
+  function supplySnapshot(f){return {packCount:Number(f.elements.packCount.value),packSize:Number(f.elements.packSize.value),unitsPerInterval:Number(f.elements.unitsPerInterval.value),intervalDays:Number(f.elements.intervalDays.value),packUnit:f.elements.packUnit.value}}
+  function supplyDescription(x){const n=supplyDays(x);return n===null?'كمية العبوات أو عدد الوحدات أو معدل الاستخدام غير مكتمل':`${x.packCount} علبة × ${x.packSize} ${x.packUnit||'وحدة'} ÷ ${x.unitsPerInterval} كل ${x.intervalDays} يوم = ${n} يوم تغطية`}
+  function supplyMarkup(m,chooseQuantity=false){const x=packDefaults(m);const mode=(chooseQuantity?'quantity':m.supplyMode==='quantity'?'quantity':'duration');
+    const options=['حبة','كبسولة','أمبولة','جرعة','قطعة','كيس','مل'].map(v=>`<option value="${v}" ${x.packUnit===v?'selected':''}>${v}</option>`).join('');
+    return `<div class="supply-panel"><div class="field supply-mode"><label>طريقة حساب الصرف القادم</label><div class="calc-switch" role="group" aria-label="طريقة حساب الصرف القادم">
+        <label class="calc-option"><input type="radio" name="calcMode" value="quantity" ${mode==='quantity'?'checked':''}><span>حسب الكمية</span></label>
+        <label class="calc-option"><input type="radio" name="calcMode" value="duration" ${mode==='duration'?'checked':''}><span>حسب المدة</span></label>
+      </div></div>
+      <div id="supplyQuantity" class="quantity-params" ${mode==='quantity'?'':'hidden'}>
+        <div class="two"><div class="field"><label>عدد العلب المستلمة</label><input type="number" name="packCount" min="1" max="500" step="1" value="${x.packCount}" placeholder="مثال: 3"><span class="supply-help">عدد العلب التي استلمتها فعلًا، وليس المعتمدة فقط</span></div><div class="field"><label>عدد الوحدات في كل علبة</label><input type="number" name="packSize" min="0.01" max="10000" step="any" value="${x.packSize}" placeholder="مثال: 28"></div></div>
+        <div class="field"><label>نوع الوحدة في العلبة</label><select name="packUnit">${options}</select></div>
+        <div class="two"><div class="field"><label>عدد الوحدات المستخدمة</label><input type="number" name="unitsPerInterval" min="0.01" max="100" step="any" value="${x.unitsPerInterval}" placeholder="1 أو 2"></div><div class="field"><label>كل كم يوم؟</label><input type="number" name="intervalDays" min="1" max="365" step="1" value="${x.intervalDays}" placeholder="1 أو 7"></div></div>
+        <div class="supply-hint">حبة مرة يوميًا = 1 كل 1 يوم • مرتين يوميًا = 2 كل 1 يوم • مرة أسبوعيًا = 1 كل 7 أيام.</div>
+        <div class="supply-verify">بيانات مساعدة من الصور: ${esc(x.source)}. <strong>تأكد من الجرعة الفعلية الموصوفة والكمية المستلمة قبل الحفظ.</strong></div>
+        <div id="supplyCalcPreview" class="supply-preview">أدخل عدد العلب لحساب التغطية.</div>
+      </div>
+      <div class="two" id="supplyDuration" ${mode==='duration'?'':'hidden'}><div class="field"><label>مدة الصرف</label><input name="qty" type="number" min="1" max="1000" step="1" value="${m.qty||3}"></div><div class="field"><label>الوحدة</label><select name="unit"><option value="months" ${m.unit==='months'?'selected':''}>شهر</option><option value="weeks" ${m.unit==='weeks'?'selected':''}>أسبوع</option><option value="days" ${m.unit==='days'?'selected':''}>يوم</option></select></div></div>
+    </div>`;
+  }
+  function supplyPreview(form,date){const q=form.elements.calcMode.value==='quantity';
+    form.querySelector('#supplyQuantity').hidden=!q;form.querySelector('#supplyDuration').hidden=q;
+    const fields=['packCount','packSize','unitsPerInterval','intervalDays'];
+    for(const name of fields)form.elements[name].required=q;
+    form.elements.qty.required=!q;
+    if(q){const x=supplySnapshot(form),days=supplyDays(x);form.querySelector('#supplyCalcPreview').textContent=days!==null?supplyDescription(x):'أكمل عدد العلب والوحدات ومعدل الاستخدام ليحسب الموعد.';
+      return {next:days!==null?addDuration(date,days,'days'):'',days,x};}
+    return {next:addDuration(date,Number(form.elements.qty.value),form.elements.unit.value),days:null,x:null};
+  }
+  function nextDate(m){if(m.manualNext && toDate(m.manualNext))return m.manualNext;
+    const d=m.supplyMode==='quantity'?supplyDays(m):null;
+    return d!==null?addDuration(m.last,d,'days'):addDuration(m.last,m.qty,m.unit)}
+  function daysUntil(s){const d=toDate(s),now=toDate(today());return d?Math.round((d.getTime()-now.getTime())/msday):99999}
+  function dateText(s){const d=toDate(s);return d?new Intl.DateTimeFormat('ar-SA-u-ca-gregory-nu-latn',{day:'numeric',month:'short',year:'numeric'}).format(d):'—'}
+  function humanDays(n){if(n<0)return `متأخر ${Math.abs(n)} ${Math.abs(n)===1?'يوم':Math.abs(n)===2?'يومين':'أيام'}`;if(n===0)return 'موعده اليوم';if(n===1)return 'باقي يوم واحد';if(n===2)return 'باقي يومان';return `باقي ${n} أيام`}
+  function tier(n){return n<0?'overdue':n===0?'today':n<=notificationDays?'soon':'later'}
+  function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+  function normalizeHistory(h){return {date:h.date,note:String(h.note||'').slice(0,500),approvalNo:String(h.approvalNo||'').slice(0,80),quantity:String(h.quantity??'').slice(0,80),quantityUnit:String(h.quantityUnit||'').slice(0,45),packCount:positiveNum(h.packCount),packSize:positiveNum(h.packSize),unitsPerInterval:positiveNum(h.unitsPerInterval),intervalDays:positiveNum(h.intervalDays),packUnit:String(h.packUnit||'').slice(0,30),nextDue:toDate(h.nextDue)?h.nextDue:'',kind:['dispense','approval','approval_only','baseline'].includes(h.kind)?h.kind:'legacy'}}
+  function historyOf(x){return Array.isArray(x.history)?x.history.filter(h=>h&&toDate(h.date)).slice(-100).map(normalizeHistory):[]}
+  function normalizeMed(x){ if(!x||typeof x!=='object'||!String(x.name||'').trim()||!toDate(x.last))return null;const unit=['days','weeks','months'].includes(x.unit)?x.unit:'months',qty=Number(x.qty);if(!Number.isInteger(qty)||qty<1||qty>1000)return null;return {id:String(x.id||cryptoId()),name:String(x.name).trim().slice(0,180),last:x.last,qty,unit,note:String(x.note||'').slice(0,500),approvalNo:String(x.approvalNo||'').slice(0,80),quantity:String(x.quantity??'').slice(0,80),quantityUnit:String(x.quantityUnit||'').slice(0,45),manualNext:toDate(x.manualNext)?x.manualNext:'',supplyMode:x.supplyMode==='quantity'?'quantity':'duration',packCount:positiveNum(x.packCount),packSize:positiveNum(x.packSize),unitsPerInterval:positiveNum(x.unitsPerInterval),intervalDays:positiveNum(x.intervalDays),packUnit:String(x.packUnit||'').slice(0,30),history:historyOf(x)} }
+  // التحاليل لا تتبع صرف الأدوية: تاريخ الموافقة + 3 أشهر من نفس اليوم.
+  function normalizeLab(x){
+    if(!x||typeof x!=='object'||!String(x.name||'').trim()||!toDate(x.last))return null;
+    const history=historyOf(x);
+    return {id:String(x.id||cryptoId()),name:String(x.name).trim().slice(0,180),last:x.last,qty:3,unit:'months',note:String(x.note||'').slice(0,500),approvalNo:String(x.approvalNo||'').slice(0,60),quantity:String(x.quantity??'').slice(0,80),manualNext:toDate(x.manualNext)?x.manualNext:'',history};
+  }
+  function currentRecords(){return activeCategory==='labs'?labs:medicines}
+  function isLabs(){return activeCategory==='labs'}
+  function labelSingular(){return isLabs()?'تحليل':'دواء'}
+  function labelPlural(){return isLabs()?'تحاليل':'أدوية'}
+  function cryptoId(){return 'med-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8)}
+  function save(){if(!canStore)return;try{localStorage.setItem(KEY,JSON.stringify({version:2,medicines,labs,notificationDays,savedAt:new Date().toISOString()}))}catch(e){canStore=false;$('#storageBanner').hidden=false;toast('تعذر الحفظ. نزّل نسخة JSON للحفاظ على بياناتك.')}}
+  function load(){let stored=null;try{stored=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(stored && Array.isArray(stored.medicines)){medicines=stored.medicines.map(normalizeMed).filter(Boolean);labs=Array.isArray(stored.labs)?stored.labs.map(normalizeLab).filter(Boolean):[];notificationDays=[3,5,7,10,14,21].includes(Number(stored.notificationDays))?Number(stored.notificationDays):7}else{medicines=initial.map(m=>({...m,history:[]}));labs=[];save()}}
+  function parsedMeds(){return currentRecords().map(m=>({...m,note:isLabs()?[m.approvalNo?'موافقة #'+m.approvalNo:'',m.note].filter(Boolean).join(' • '):m.note,next:nextDate(m),remaining:daysUntil(nextDate(m))})).sort((a,b)=>a.remaining-b.remaining||a.name.localeCompare(b.name,'ar'))}
+  function filterName(){return {all:isLabs()?'جميع التحاليل':'جميع الأدوية',late:'متأخر / اليوم',soon:`خلال ${notificationDays} أيام`,later:`بعد ${notificationDays} أيام`}[activeFilter]}
+  function visibleMeds(parsed=parsedMeds()){const query=$('#search').value.trim().toLocaleLowerCase();return {query,filterLabel:filterName(),filtered:parsed.filter(m=>(m.name+' '+m.note).toLocaleLowerCase().includes(query)&& (activeFilter==='all'||(activeFilter==='late'&&m.remaining<=0)||(activeFilter==='soon'&&m.remaining>0&&m.remaining<=notificationDays)||(activeFilter==='later'&&m.remaining>notificationDays)))} }
+  function medCard(m,actions=true){const cls=tier(m.remaining);return `<article class="med ${cls}" ${actions?`data-record-id="${esc(m.id)}" data-record-category="${activeCategory}" tabindex="0" aria-label="عرض سجل ${isLabs()?'موافقات التحليل':'صرف الدواء'} ${esc(m.name)}"`:''}><div class="medhead"><div><h3>${esc(m.name)}</h3>${m.note?`<p class="note">${esc(m.note)}</p>`:''}</div><span class="status ${cls}">${humanDays(m.remaining)}</span></div><div class="dates"><div class="date"><label>${isLabs()?'آخر موافقة':'آخر صرف'}</label><strong>${esc(dateText(m.last))}</strong></div><div class="date next"><label>${isLabs()?'الموعد القادم':'الصرف القادم'}</label><strong>${esc(dateText(m.next))}</strong></div></div>${actions?`<div class="medactions"><button class="btn btn-primary small" type="button" data-action="${isLabs()?'labapprove':'dispense'}" data-id="${esc(m.id)}">✓ ${isLabs()?'تسجيل موافقة جديدة':'تسجيل صرف جديد'}</button><button class="btn btn-outline small iconbtn" type="button" data-action="${isLabs()?'labedit':'edit'}" data-id="${esc(m.id)}" title="تعديل" aria-label="تعديل ${esc(m.name)}">✎</button><button class="btn btn-outline small iconbtn" type="button" data-action="onecalendar" data-id="${esc(m.id)}" title="تذكير تقويم" aria-label="تذكير تقويم ${esc(m.name)}">▣</button></div>`:''}</article>`}
+  function findApprovalNo(entry){
+    if(entry.approvalNo)return String(entry.approvalNo);
+    const note=String(entry.note||'');const match=note.match(/(?:موافقة(?:\s+تأمين|\s+سابقة)?\s*#|موافقة\s*#)\s*([\w\/-]+)/i);
+    return match?match[1]:'';
+  }
+  function findQuantity(entry){
+    if(entry.quantity!==undefined&&String(entry.quantity).trim())return [String(entry.quantity).trim(),entry.quantityUnit||''].filter(Boolean).join(' ');
+    const note=String(entry.note||'');const match=note.match(/المعتمد\s*(\d+)\s*من\s*(\d+)/);
+    return match?`${match[1]} من ${match[2]} (معتمد)`:'';
+  }
+  function historyItems(record,laboratory){
+    const all=historyOf(record).map((h,i)=>({...h,_index:i}));
+    const currentPresent=all.some(h=>h.date===record.last &&
+      (laboratory ? (h.kind==='approval'||(/موافقة/.test(h.note)&&h.kind!=='approval_only'))
+                  : (h.kind==='dispense'||/تم الاستلام/.test(h.note))));
+    if(!currentPresent)all.push({date:record.last,approvalNo:record.approvalNo||'',quantity:record.quantity||'',quantityUnit:record.quantityUnit||'',kind:laboratory?'approval':'dispense',note:'',_current:true});
+    all.sort((a,b)=>b.date.localeCompare(a.date)||Number(b._current||0)-Number(a._current||0)||b._index-a._index);
+    return all;
+  }
+  function showHistory(id,category){
+    const lab=category==='labs';const record=(lab?labs:medicines).find(m=>m.id===id);if(!record)return;
+    const events=historyItems(record,lab);
+    const cards=events.map((e,i)=>{
+      const approval=findApprovalNo(e),quantity=findQuantity(e);
+      const approvalOnly=e.kind==='approval_only'||/لم يُؤكد الصرف|اعتماد فقط/.test(e.note||'');
+      const title=approvalOnly?'موافقة فقط — لم يُؤكد الاستلام':lab?'موافقة تحليل':'صرف دواء';
+      const current=!approvalOnly&&e.date===record.last&&(e._current||e.kind==='dispense'||e.kind==='approval');
+      let note=String(e.note||'').replace(/\[INS:[^\]]*\]/g,'').replace(/\s+/g,' ').trim();
+      return `<section class="timeline-item ${current?'current':''} ${approvalOnly?'approval-only':''}">
+        <div class="timeline-top"><span class="timeline-date">${esc(dateText(e.date))}</span><span class="timeline-kind">${current?'الأحدث · ':''}${title}</span><button type="button" class="history-edit-btn" data-action="edithistory" data-id="${esc(record.id)}" data-history-category="${lab?'labs':'meds'}" data-hindex="${e._current?'-1':e._index}" >✎ تعديل السجل</button></div>
+        <div class="timeline-fields"><div><label>رقم الموافقة</label><strong>${approval?esc(approval):'غير مسجل'}</strong></div><div><label>${lab?'الكمية / عدد التحاليل':'الكمية المستلمة / المعتمدة'}</label><strong>${quantity?esc(quantity):'غير مسجلة'}</strong></div></div>
+        ${!lab&&e.nextDue?`<p class="timeline-note">موعد المتابعة المحسوب وقت الصرف: ${esc(dateText(e.nextDue))}${supplyDays(e)?` • تغطية ${supplyDays(e)} يومًا`:''}</p>`:''}${note?`<p class="timeline-note">${esc(note)}</p>`:''}
+      </section>`;
+    }).join('');
+    showModal(`سجل ${lab?'موافقات التحليل':'صرف الدواء'} · ${record.name}`,`
+      <p class="timeline-intro">${lab?'تاريخ الموافقات السابقة، وليس تاريخ إجراء التحليل.':'سجلات الصرف السابقة والموافقات المتعلقة بالدواء.'} مرتبة من الأحدث للأقدم، والبيانات غير المعروفة تظهر «غير مسجلة».</p>
+      <div class="timeline">${cards||'<div class="timeline-empty">لا يوجد سجل سابق</div>'}</div>
+      <div class="formactions"><button class="btn btn-outline" type="button" data-action="${lab?'labedit':'edit'}" data-id="${esc(record.id)}">✎ تعديل البيانات</button><button type="button" class="btn btn-primary" data-action="close">إغلاق</button></div>
+    `,'history',id);
+  }
+  function editHistory(id,category,index){
+    const lab=category==='labs';const record=(lab?labs:medicines).find(x=>x.id===id);if(!record)return;
+    const synthetic=index===-1;
+    const source=synthetic?{date:record.last,approvalNo:record.approvalNo||'',quantity:record.quantity||'',note:'',kind:lab?'approval':'dispense',nextDue:nextDate(record),packCount:record.packCount,packSize:record.packSize,unitsPerInterval:record.unitsPerInterval,intervalDays:record.intervalDays,packUnit:record.packUnit}:(record.history||[])[index];
+    if(!source)return;
+    const e=normalizeHistory(source);
+    // The most recent actual dispense/approval is the one used for the current card.
+    const actual=lab?e.kind==='approval':e.kind==='dispense';
+    const activeEntry=synthetic||(actual&&e.date===record.last&&!historyOf(record).some((h,j)=>j>index&&h.kind===e.kind&&h.date===e.date));
+    const unitOptions=['حبة','كبسولة','أمبولة','جرعة','قطعة','كيس','مل'];
+    const initialUnit=e.packUnit||record.packUnit||'حبة';
+    showModal(`تعديل سجل ${lab?'الموافقة':'الصرف'} · ${record.name}`,`<form id="editHistoryForm" class="formgrid">
+      <div class="history-editor-hint">${activeEntry?'هذا هو السجل الأحدث، وسيتم تحديث البطاقة وموعد المتابعة عند حفظ تغييره.':'تعديل هذا السجل السابق لن يغيّر موعد الصرف أو الموافقة الأحدث.'} لا تُغيّر الجرعة إلا لتصحيح ما كان مسجلًا وقت الصرف، وليس لتعديل تعليمات الطبيب.</div>
+      ${formField(lab?'تاريخ الموافقة':'تاريخ العملية','date',e.date,'date','required')}
+      <div class="two">${formField('رقم الموافقة (اختياري)','approvalNo',e.approvalNo,'text','maxlength="80"')}${formField(lab?'الكمية / عدد التحاليل':'الكمية المصروفة','quantity',e.quantity,'text','maxlength="80"')}</div>
+      ${lab?'':`<div class="two">${formField('عدد العلب المستلمة','packCount',e.packCount||'','number','min="1" max="500" step="1"')}${formField('الوحدات في العلبة','packSize',e.packSize||'','number','min="0.01" max="10000" step="any"')}</div>
+      <div class="two">${formField('عدد الوحدات المستخدمة','unitsPerInterval',e.unitsPerInterval||'','number','min="0.01" max="100" step="any"')}${formField('كل كم يوم؟','intervalDays',e.intervalDays||'','number','min="1" max="365" step="1"')}</div>
+      <div class="field"><label>نوع الوحدة</label><select name="packUnit">${unitOptions.map(v=>`<option value="${v}" ${v===initialUnit?'selected':''}>${v}</option>`).join('')}</select></div>`}
+      ${formField('الموعد القادم المسجل (اختياري)','nextDue',e.nextDue|| (activeEntry?nextDate(record):''),'date')}
+      <div class="field"><label>ملاحظات السجل</label><textarea name="note" maxlength="500">${esc(e.note)}</textarea></div>
+      <div class="formactions"><button type="button" class="btn btn-soft" data-action="close">إلغاء</button><button type="submit" class="btn btn-primary">حفظ تعديل السجل</button></div>
+      </form>`, 'edithistory',id);
+    $('#editHistoryForm').addEventListener('submit',ev=>{
+      ev.preventDefault();const f=ev.currentTarget,date=f.elements.date.value,auth=f.elements.approvalNo.value.trim(),quantity=f.elements.quantity.value.trim(),nextDue=f.elements.nextDue.value;
+      if(!toDate(date)||(nextDue&&(!toDate(nextDue)||nextDue<=date))){toast('راجع التاريخ والموعد القادم');return}
+      if(!activeEntry&&date>record.last){toast('هذا تاريخ أحدث من آخر عملية؛ استخدم تسجيل صرف أو موافقة جديدة بدل تعديل سجل قديم');return}
+      const params=lab?{}:{packCount:positiveNum(f.elements.packCount.value),packSize:positiveNum(f.elements.packSize.value),unitsPerInterval:positiveNum(f.elements.unitsPerInterval.value),intervalDays:positiveNum(f.elements.intervalDays.value),packUnit:f.elements.packUnit.value};
+      if(!lab){const values=['packCount','packSize','unitsPerInterval','intervalDays'].map(k=>f.elements[k].value.trim());if(values.some(Boolean)&&!values.every(Boolean)){toast('أكمل الكمية والجرعات الأربع أو اتركها كلها فارغة');return}
+        if(values.every(Boolean)&&supplyDays(params)===null){toast('راجع كميات وجرعات السجل');return}}
+      const originalDue=e.nextDue||(activeEntry?nextDate(record):'');
+      const dueManuallyEdited=nextDue!==originalDue;
+      const oldManualNext=record.manualNext||'';
+      const sameDose=lab||(['packCount','packSize','unitsPerInterval','intervalDays'].every(k=>!params[k])||
+        ['packCount','packSize','unitsPerInterval','intervalDays'].every(k=>Number(params[k])===Number(record[k])));
+      const keepOldManual=!dueManuallyEdited&&date===e.date&&sameDose;
+      const updated=normalizeHistory({...e,date,approvalNo:auth,quantity,nextDue,note:f.elements.note.value,...params});
+      if(synthetic)record.history.push(updated);else record.history[index]=updated;
+      record.history=record.history.slice(-100);
+      if(activeEntry){
+        record.last=date;record.approvalNo=auth;record.quantity=quantity;
+        if(lab){const calculated=addDuration(date,3,'months');record.manualNext=keepOldManual?oldManualNext:(dueManuallyEdited&&nextDue&&nextDue!==calculated?nextDue:'')}
+        else {const days=supplyDays(params);
+          if(days!==null){Object.assign(record,params);record.qty=days;record.unit='days';record.supplyMode='quantity'}
+          const calculated=record.supplyMode==='quantity'&&supplyDays(record)!==null?addDuration(date,supplyDays(record),'days'):addDuration(date,record.qty,record.unit);
+          record.manualNext=keepOldManual?oldManualNext:(dueManuallyEdited&&nextDue&&nextDue!==calculated?nextDue:'');
+        }
+        // When the user corrects date/quantity, refresh the computed due unless they explicitly edited it.
+        updated.nextDue=nextDate(record);
+      }
+      save();closeModal();render();showHistory(id,category);toast('تم تعديل السجل وحفظه');
+    });
+  }
+  function render(){const parsed=parsedMeds(),records=currentRecords();const late=parsed.filter(m=>m.remaining<=0).length,soon=parsed.filter(m=>m.remaining>0&&m.remaining<=notificationDays).length;
+    $('#countAll').textContent=records.length;$('#countLate').textContent=late;$('#countSoon').textContent=soon;$('#countLater').textContent=records.length-late-soon;$('#tabMedCount').textContent=`(${medicines.length})`;$('#tabLabCount').textContent=`(${labs.length})`;$('#countAll').closest('button').querySelector('.label').textContent=isLabs()?'إجمالي التحاليل':'إجمالي الأدوية';
+    $('.stats .stat.warning .label').textContent=`خلال ${notificationDays} أيام`;$('.stats .stat.ok .label').textContent=`بعد ${notificationDays} أيام`;
+    const {filtered,filterLabel}=visibleMeds(parsed);
+    $('#meds').innerHTML=filtered.length?filtered.map(m=>medCard(m,true)).join(''):`<div class="empty">${!records.length?'لا توجد بيانات محفوظة في هذا التطبيق بعد. افتح «الإعدادات» لاستيراد نسخة JSON أو أضف سجلًا جديدًا.':'لا توجد نتائج في هذا التصنيف. جرّب تغيير الفلتر أو البحث.'}</div>`;
+    document.querySelectorAll('.stats [data-filter]').forEach(b=>{const on=b.dataset.filter===activeFilter;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});
+    document.querySelectorAll('.category-tab').forEach(b=>{const on=b.dataset.category===activeCategory;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});
+    $('[data-action="add"]').innerHTML=isLabs()?'＋ إضافة تحليل':'＋ إضافة دواء';
+    $('#listTitle').textContent=isLabs()?'قائمة التحاليل':'قائمة الأدوية';
+    $('#brandSubtitle').textContent=isLabs()?'متابعة موافقات التحاليل الدورية':'متابعة مواعيد إعادة صرف الأدوية';
+    $('#search').placeholder=isLabs()?'ابحث عن تحليل...':'ابحث عن دواء...';
+    $('#insuranceImportButton').hidden=isLabs();
+  }
+  function showModal(title,html,type,id){mode=type;editing=id||null;modalFocus=document.activeElement;$('#modalHeading').textContent=title;$('#modalContent').innerHTML=html;$('#modal').hidden=false;document.body.classList.add('noscroll');setTimeout(()=>$('#modalContent input:not([type="checkbox"]), #modalContent button, #modalContent select')?.focus(),0)}
+  function closeModal(){if(mode==='backup')clearBackup();$('#modal').hidden=true;document.body.classList.remove('noscroll');editing=null;mode='';modalFocus?.focus?.()}
+  function formField(label,name,val='',type='text',extra=''){return `<div class="field"><label for="f_${name}">${label}</label><input id="f_${name}" name="${name}" type="${type}" value="${esc(val)}" ${extra}></div>`}
+  function medForm(id){
+    const m=id?medicines.find(x=>x.id===id):{name:'',last:today(),qty:3,unit:'months',note:'',manualNext:'',supplyMode:'duration',history:[]};if(!m)return;
+    showModal(id?'تعديل بيانات الدواء':'إضافة دواء جديد',`<form id="medicineForm" class="formgrid">
+      ${formField('اسم الدواء','name',m.name,'text','required maxlength="180" placeholder="اسم الدواء"')}
+      ${formField('تاريخ آخر صرف','last',m.last,'date','required')}
+      ${supplyMarkup(m)}
+      <div class="calculated" id="previewDate">الصرف القادم تلقائيًا: —</div>
+      <label class="checkbox-line"><input type="checkbox" id="overrideCheck" ${m.manualNext?'checked':''}>تحديد تاريخ الصرف القادم يدويًا</label><div id="overrideArea" ${m.manualNext?'':'hidden'}>${formField('تاريخ الصرف القادم','manualNext',m.manualNext||'','date')}</div>
+      <div class="two">${formField('رقم موافقة آخر صرف (اختياري)','approvalNo',m.approvalNo||'','text','maxlength="80"')}${formField('كمية آخر صرف (اختياري)','quantity',m.quantity||'','text','maxlength="80" placeholder="3 علب"')}</div>
+      <div class="field"><label>ملاحظات</label><textarea name="note" maxlength="500">${esc(m.note||'')}</textarea></div>
+      <div class="formactions">${id?'<button type="button" class="btn btn-danger" data-action="delete">حذف الدواء</button>':''}<button type="button" class="btn btn-soft" data-action="close">إلغاء</button><button type="submit" class="btn btn-primary">حفظ الدواء</button></div>
+    </form>`,'medicine',id);
+    const f=$('#medicineForm');
+    f.addEventListener('input',updatePreview);f.addEventListener('change',updatePreview);f.addEventListener('submit',saveMedicine);updatePreview();
+  }
+  function updatePreview(){const f=$('#medicineForm');if(!f)return;
+    const result=supplyPreview(f,f.elements.last.value),manual=$('#overrideCheck').checked;
+    $('#overrideArea').hidden=!manual;f.elements.manualNext.required=manual;
+    $('#previewDate').textContent='الصرف القادم تلقائيًا: '+dateText(result.next)+(result.days!==null?` (بعد ${result.days} يومًا)`:'')+(manual?' • سيتم استخدام التاريخ اليدوي بدلًا منه':'');
+  }
+  function saveMedicine(ev){ev.preventDefault();const f=ev.currentTarget;
+    const qty=Number(f.elements.qty.value),last=f.elements.last.value,manualNext=$('#overrideCheck').checked?f.elements.manualNext.value:'';
+    const mode=f.elements.calcMode.value,calc=supplyPreview(f,last),x=supplySnapshot(f);
+    if(!String(f.elements.name.value).trim()||!toDate(last)||(manualNext&&!toDate(manualNext))||
+       (mode==='quantity'&&calc.days===null)||(mode==='duration'&&(!Number.isInteger(qty)||qty<1||qty>1000))){toast('راجع الكمية والوصفة والتواريخ');return}
+    const old=medicines.find(m=>m.id===editing);
+    const m=normalizeMed({id:old?.id||cryptoId(),name:f.elements.name.value,last,
+      qty:mode==='quantity'?calc.days:qty,unit:mode==='quantity'?'days':f.elements.unit.value,
+      supplyMode:mode,packCount:mode==='quantity'?x.packCount:null,packSize:x.packSize||null,
+      unitsPerInterval:x.unitsPerInterval||null,intervalDays:x.intervalDays||null,packUnit:x.packUnit,
+      note:f.elements.note.value,approvalNo:f.elements.approvalNo.value,
+      quantity:f.elements.quantity.value||(mode==='quantity'?`${x.packCount} علبة × ${x.packSize} ${x.packUnit}`:''),
+      quantityUnit:'',manualNext,history:old?.history||[]});
+    if(!m)return;
+    if(old)medicines[medicines.findIndex(v=>v.id===old.id)]=m;else medicines.push(m);
+    save();closeModal();render();toast('تم حفظ بيانات الدواء');
+  }
+  function dispenseForm(id){const m=medicines.find(m=>m.id===id);if(!m)return;
+    // استرجاع نفس كمية وجرعة آخر صرف لتكون المراجعة والتأكيد أسرع، مع السماح بتغييرها.
+    const historyDispenses=historyOf(m).filter(h=>h.kind==='dispense'&&h.packCount)
+      .sort((a,b)=>b.date.localeCompare(a.date));
+    const previous=historyDispenses.find(h=>h.date===m.last)||historyDispenses[0]||null;
+    const ref=packDefaults(m);
+    const inherited={packCount:positiveNum(m.packCount)||positiveNum(previous?.packCount)||'',
+      packSize:positiveNum(m.packSize)||positiveNum(previous?.packSize)||ref.packSize,
+      unitsPerInterval:positiveNum(m.unitsPerInterval)||positiveNum(previous?.unitsPerInterval)||ref.unitsPerInterval,
+      intervalDays:positiveNum(m.intervalDays)||positiveNum(previous?.intervalDays)||ref.intervalDays,
+      packUnit:m.packUnit||previous?.packUnit||ref.packUnit};
+    const canCalculate=!!(inherited.packCount&&inherited.packSize&&inherited.unitsPerInterval&&inherited.intervalDays);
+    const edit={...m,...inherited,supplyMode:canCalculate?(m.supplyMode==='duration'?'duration':'quantity'):'duration'};
+    showModal(`تسجيل صرف · ${m.name}`,`<form id="dispenseForm" class="formgrid">
+      ${formField('تاريخ استلام الدواء فعليًا','date',today(),'date','required')}
+      <div class="supply-hint">تم تعبئة بيانات آخر صرف تلقائيًا إن كانت مسجلة؛ راجع العلب والجرعة قبل التأكيد، ولا تنسَ إدخال رقم الموافقة الجديدة.</div>
+      ${supplyMarkup(edit)}
+      <div class="calculated" id="previewDate">الصرف القادم تلقائيًا: —</div>
+      <label class="checkbox-line"><input type="checkbox" id="overrideCheck">تحديد تاريخ الصرف القادم يدويًا</label>
+      <div id="overrideArea" hidden>${formField('تاريخ الصرف القادم المحدد','manualNext','','date')}</div>
+      <div class="two">${formField('رقم الموافقة الجديدة (اختياري)','approvalNo','','text','maxlength="80"')}${formField('وصف الكمية (اختياري)','quantity',m.quantity||'','text','maxlength="80" placeholder="يُعبّأ تلقائيًا من العلب"')}</div>
+      <div class="field"><label>ملاحظات (اختياري)</label><textarea name="comment" maxlength="250" placeholder="مثال: تم الاستلام من الصيدلية"></textarea></div>
+      <div class="formactions"><button class="btn btn-soft" type="button" data-action="close">إلغاء</button><button class="btn btn-primary" type="submit">تأكيد الصرف</button></div>
+    </form>`,'dispense',id);
+    const f=$('#dispenseForm');f.addEventListener('input',updateDispensePreview);f.addEventListener('change',updateDispensePreview);
+    f.addEventListener('submit',ev=>{
+      ev.preventDefault();const form=ev.currentTarget,s=form.elements.date.value,mode=form.elements.calcMode.value;
+      const qty=Number(form.elements.qty.value),calculated=supplyPreview(form,s),x=supplySnapshot(form);
+      const manualNext=$('#overrideCheck').checked?form.elements.manualNext.value:'';
+      if(!toDate(s)||manualNext&&!toDate(manualNext)||
+        (mode==='quantity'&&calculated.days===null)||(mode==='duration'&&(!Number.isInteger(qty)||qty<1||qty>1000))){toast('راجع الكمية والتكرار والتواريخ قبل تأكيد الصرف');return}
+      const current=medicines.find(x=>x.id===editing);if(!current)return;
+      if(s<current.last&&!confirm('تاريخ الاستلام أقدم من تاريخ آخر صرف؛ هل تريد المتابعة؟'))return;
+      current.history=current.history||[];
+      if(!current.history.some(h=>h.date===current.last&&(h.kind==='dispense'||/تم الاستلام|صرف سابق|تاريخ الصرف السابق/.test(h.note))))current.history.push({date:current.last,kind:'baseline',approvalNo:current.approvalNo||'',quantity:current.quantity||'',quantityUnit:current.quantityUnit||'',note:'آخر صرف مسجل قبل التحديث'});
+      const approvalNo=form.elements.approvalNo.value.trim().slice(0,80),comment=form.elements.comment.value.trim().slice(0,250);
+      const countText=mode==='quantity'?`${x.packCount} علبة × ${x.packSize} ${x.packUnit}`:'';
+      const quantity=(form.elements.quantity.value.trim()||countText).slice(0,80);
+      const due=manualNext||(mode==='quantity'?calculated.next:addDuration(s,qty,form.elements.unit.value));
+      current.history.push({date:s,kind:'dispense',approvalNo,quantity,packCount:mode==='quantity'?x.packCount:null,
+         packSize:mode==='quantity'?x.packSize:null,unitsPerInterval:mode==='quantity'?x.unitsPerInterval:null,
+         intervalDays:mode==='quantity'?x.intervalDays:null,packUnit:mode==='quantity'?x.packUnit:'',nextDue:due,note:comment});
+      current.history=current.history.slice(-100);
+      current.last=s;current.qty=mode==='quantity'?calculated.days:qty;current.unit=mode==='quantity'?'days':form.elements.unit.value;
+      current.supplyMode=mode;
+      if(mode==='quantity')Object.assign(current,x);else current.packCount=null;
+      current.manualNext=manualNext;current.approvalNo=approvalNo;current.quantity=quantity;current.quantityUnit='';
+      if(comment)current.note=[current.note,comment].filter(Boolean).join(' | ').slice(0,500);
+      save();closeModal();render();toast('تم تسجيل الصرف: الموعد القادم '+dateText(nextDate(current)));
+    });updateDispensePreview();
+  }
+  function updateDispensePreview(){const f=$('#dispenseForm');if(!f)return;
+    const override=$('#overrideCheck').checked;$('#overrideArea').hidden=!override;f.elements.manualNext.required=override;
+    const result=supplyPreview(f,f.elements.date.value);
+    $('#previewDate').textContent='الصرف القادم تلقائيًا: '+dateText(result.next)+(result.days!==null?` (تغطية ${result.days} يومًا)`:'')+(override?' • التاريخ اليدوي سيتجاوز هذا الحساب':'');
+  }
+  function switchCategory(category){
+    if(!['meds','labs'].includes(category)||activeCategory===category)return;
+    activeCategory=category;activeFilter='all';$('#search').value='';render();
+  }
+  function labForm(id){
+    const old=id?labs.find(l=>l.id===id):null;
+    if(id&&!old)return;
+    const l=old||{name:'',last:today(),approvalNo:'',note:'',manualNext:'',history:[]};
+    showModal(id?'تعديل بيانات التحليل':'إضافة تحليل للمتابعة',`<form id="labForm" class="formgrid">
+      ${formField('اسم التحليل أو مجموعة التحاليل','name',l.name,'text','required maxlength="180" placeholder="مثال: التحاليل الدورية أو HbA1c"')}
+      ${formField('تاريخ آخر موافقة من التأمين (ميلادي)','last',l.last,'date','required')}
+      ${formField('رقم الموافقة (اختياري)','approvalNo',l.approvalNo,'text','maxlength="60" placeholder="إذا كان ظاهرًا في التأمين"')}
+      ${formField('الكمية / عدد التحاليل المعتمدة (اختياري)','quantity',l.quantity||'','text','maxlength="80" placeholder="مثال: 1 من 7"')}
+      <div class="calculated" id="labPreview">موعد المتابعة بعد ٣ أشهر: ${dateText(nextDate(l))}</div>
+      <label class="checkbox-line"><input type="checkbox" id="labOverride" ${l.manualNext?'checked':''}>تحديد موعد المتابعة القادم يدويًا</label>
+      <div id="labOverrideArea" ${l.manualNext?'':'hidden'}>${formField('الموعد القادم يدويًا','manualNext',l.manualNext,'date')}</div>
+      <div class="field"><label for="labNote">ملاحظات (اختياري)</label><textarea id="labNote" name="note" maxlength="500">${esc(l.note)}</textarea></div>
+      ${id&&l.history.length?`<div class="history"><h4>سجل الموافقات السابقة</h4><ul>${[...l.history].reverse().slice(0,8).map(h=>`<li>${esc(dateText(h.date))}${h.note?' — '+esc(h.note):''}</li>`).join('')}</ul></div>`:''}
+      <div class="lab-warning">هذا موعد لمتابعة موافقة التأمين كل ٣ أشهر، وليس تحديدًا لموعد إجراء التحليل. التوقيت الطبي حسب الطبيب.</div>
+      <div class="formactions">${id?'<button type="button" class="btn btn-danger" data-action="labdelete">حذف التحليل</button>':''}<button type="button" class="btn btn-soft" data-action="close">إلغاء</button><button type="submit" class="btn btn-primary">حفظ التحليل</button></div>
+    </form>`,'labedit',id);
+    const f=$('#labForm');
+    const preview=()=>{$('#labOverrideArea').hidden=!$('#labOverride').checked;f.elements.manualNext.required=$('#labOverride').checked;$('#labPreview').textContent='موعد المتابعة بعد ٣ أشهر: '+dateText(addDuration(f.elements.last.value,3,'months'))};
+    f.addEventListener('input',preview);f.addEventListener('change',preview);preview();
+    f.addEventListener('submit',e=>{
+      e.preventDefault();const x=e.currentTarget,manual=$('#labOverride').checked?x.elements.manualNext.value:'';
+      const last=x.elements.last.value;
+      if(!String(x.elements.name.value).trim()||!toDate(last)||(manual&&!toDate(manual))||(manual&&manual<=last)){toast('راجع الاسم وتاريخ الموافقة والموعد القادم');return}
+      const obj=normalizeLab({id:old?.id||cryptoId(),name:x.elements.name.value,last,approvalNo:x.elements.approvalNo.value,quantity:x.elements.quantity.value,note:x.elements.note.value,manualNext:manual,history:old?.history||[]});
+      if(!obj){toast('البيانات غير مكتملة');return}
+      if(old)labs[labs.findIndex(a=>a.id===old.id)]=obj;else labs.push(obj);
+      save();closeModal();render();toast('تم حفظ متابعة التحليل');
+    });
+  }
+  function labApprovalForm(id){
+    const lab=labs.find(x=>x.id===id);if(!lab)return;
+    showModal(`تسجيل موافقة جديدة · ${lab.name}`,`<form id="labApprovalForm" class="formgrid">
+      ${formField('تاريخ الموافقة الجديدة','last',today(),'date','required')}
+      ${formField('رقم الموافقة (اختياري)','approvalNo','','text','maxlength="60"')}
+      ${formField('الكمية / عدد التحاليل المعتمدة (اختياري)','quantity',lab.quantity||'','text','maxlength="80" placeholder="مثال: 1 من 7"')}
+      <div class="calculated" id="labNext">الموعد القادم بعد ٣ أشهر: —</div>
+      <label class="checkbox-line"><input type="checkbox" id="labNewOverride">تحديد الموعد القادم يدويًا</label>
+      <div id="labNewOverrideArea" hidden>${formField('موعد المتابعة القادم','manualNext','','date')}</div>
+      <div class="field"><label for="labApprovalComment">ملاحظة (اختياري)</label><textarea id="labApprovalComment" name="comment" maxlength="250" placeholder="مثال: نوع التحاليل المعتمدة"></textarea></div>
+      <div class="lab-warning">حفظ الموافقة لا يعني أن التحليل أُجري؛ هذا سجل للموافقات والمتابعة فقط.</div>
+      <div class="formactions"><button type="button" class="btn btn-soft" data-action="close">إلغاء</button><button type="submit" class="btn btn-primary">تأكيد الموافقة</button></div>
+    </form>`,'labapproval',id);
+    const f=$('#labApprovalForm');
+    const preview=()=>{$('#labNewOverrideArea').hidden=!$('#labNewOverride').checked;f.elements.manualNext.required=$('#labNewOverride').checked;$('#labNext').textContent='الموعد القادم بعد ٣ أشهر: '+dateText(addDuration(f.elements.last.value,3,'months'))};
+    f.addEventListener('input',preview);f.addEventListener('change',preview);preview();
+    f.addEventListener('submit',e=>{
+      e.preventDefault();const x=e.currentTarget,last=x.elements.last.value,man=$('#labNewOverride').checked?x.elements.manualNext.value:'';
+      if(!toDate(last)||last<lab.last||(man&&(!toDate(man)||man<=last))){toast('تأكد أن تاريخ الموافقة ليس أقدم من آخر موافقة، والموعد القادم بعده');return}
+      lab.history=lab.history||[];
+      if(!lab.history.some(h=>h.date===lab.last&&(h.kind==='approval'||/موافقة سابقة/.test(h.note))))lab.history.push({date:lab.last,kind:'baseline',approvalNo:lab.approvalNo||'',quantity:lab.quantity||'',note:'موافقة مسجلة قبل التحديث'});
+      const approvalNo=x.elements.approvalNo.value.trim().slice(0,60),quantity=x.elements.quantity.value.trim().slice(0,80);
+      lab.history.push({date:last,kind:'approval',approvalNo,quantity,note:x.elements.comment.value.trim().slice(0,250)});lab.history=lab.history.slice(-100);
+      lab.last=last;lab.approvalNo=approvalNo;lab.quantity=quantity;lab.manualNext=man;
+      if(x.elements.comment.value.trim())lab.note=[lab.note,x.elements.comment.value.trim()].filter(Boolean).join(' | ').slice(0,500);
+      save();closeModal();render();toast('تم تسجيل الموافقة وحساب الموعد بعد ٣ أشهر');
+    });
+  }
+  function settingForm(){
+    const lab=isLabs();
+    const settingsPanels=`<div class="settings-panels">
+      <section class="panel"><h3>🔔 كيف توصلني تنبيهات؟</h3>
+        <p>${lab?'تظهر موافقات التحاليل المتأخرة باللون الأحمر والقريبة بالبرتقالي. المواعيد للتذكير الإداري بالموافقة وليست لموعد إجراء التحليل.':'داخل التطبيق تظهر الأدوية المتأخرة باللون الأحمر والقريبة بالبرتقالي. لإضافة التنبيهات لتقويم الآيفون استخدم زر «أضف للتقويم».'}</p>
+        <div class="actions"><button type="button" class="btn btn-primary small" data-action="calendar">أضف للتقويم</button><button type="button" class="btn btn-outline small" data-action="guide">طريقة الاستخدام</button></div>
+        <div class="hint">التطبيق المحلي لا يرسل تنبيهات بنفسه وهو مغلق. تذكيرات التقويم تتطلب استيراد ملف ICS، وعند تغيير موعد يلزم تحديث الحدث القديم.</div>
+      </section>
+      <section class="panel"><h3>💾 حفظ بياناتك</h3>
+        <p>البيانات تحفظ محليًا إن سمح بذلك عارض الملفات على الآيفون. احتفظ بنسخة JSON خارج التطبيق أو بنصها في «الملاحظات» قبل الانتقال إلى ملف HTML جديد.</p>
+        <div class="actions"><button type="button" class="btn btn-primary small" data-action="backup">حفظ نسخة احتياطية</button><button type="button" class="btn btn-outline small" data-action="import">استيراد JSON</button><button type="button" class="btn btn-outline small" data-action="importtext">استيراد نص نسخة</button></div>
+        <div class="hint">${lab?'هذه متابعة لموافقات التحاليل، وليست تحديدًا طبيًا لمواعيد الفحص.':'حساب التغطية تقديري بناء على الكميات ومعدل الاستخدام الموثّق، وليس تعديلًا للجرعة الموصوفة.'}</div>
+      </section></div>`;
+    showModal('إعدادات التطبيق',`<form id="settingsForm" class="formgrid"><div class="field"><label for="settingDays">متى يعتبر الموعد قريبًا؟</label><select id="settingDays" name="days">${[3,5,7,10,14,21].map(d=>`<option value="${d}" ${notificationDays===d?'selected':''}>خلال ${d} أيام</option>`).join('')}</select><span class="helper">يغيّر التمييز البرتقالي للأدوية والتحاليل.</span></div><div class="formactions"><button type="button" class="btn btn-soft" data-action="close">إلغاء</button><button type="submit" class="btn btn-primary">حفظ الإعدادات</button></div></form>${settingsPanels}`, 'settings');
+    $('#settingsForm').addEventListener('submit',e=>{e.preventDefault();notificationDays=Number($('#settingDays').value);save();closeModal();render();toast('تم تحديث الإعدادات')});
+  }
+  function guide(){showModal('طريقة الاستخدام',`<div style="line-height:2;color:#516575;font-size:14px"><p><b>سجل الدواء أو التحليل:</b> اضغط على البطاقة نفسها لعرض تواريخ الصرف أو الموافقة ورقمها والكمية، واضغط «تعديل السجل» لتصحيح أي عملية سابقة.</p><p><b>التحاليل:</b> افتح تبويب «التحاليل»، أضف اسم التحليل وآخر موافقة، ثم استخدم «تسجيل موافقة جديدة» بعد أي موافقة لاحقة. الموعد القادم محسوب بعد ٣ أشهر، مع إمكانية تعديله يدويًا. لا يُقصد به موعد إجراء التحليل الطبي.</p><p><b>١. تعديل أي دواء:</b> اضغط علامة القلم، وحدد تاريخ آخر صرف، واختر الحساب بالكمية (العلب × الحبات ÷ الاستخدام) أو بالمدة اليدوية. سيظهر الموعد تلقائيًا.</p><p><b>٢. بعد استلام الدواء:</b> اضغط «تسجيل صرف جديد» وستظهر آخر كميات ومعدل الاستخدام المسجل تلقائيًا؛ راجعها وأكّد الاستلام وتاريخ الصرف؛ يُحتسب الموعد القادم ويحفظ سجل الصرف. بعض الأدوية مثل الأقلام تحتاج تأكيد عدد الجرعات في القلم.</p><p><b>٣. التنبيهات:</b> اضغط «أضف للتقويم» ثم اختر مشاركة ملف المواعيد أو حفظ ICS. افتح الملف وأضف الأحداث لتقويم الهاتف مع التذكيرات. إذا لم يظهر خيار الإضافة على الآيفون، أرسل الملف لنفسك بالبريد وافتحه من تطبيق البريد، أو أضف المواعيد يدويًا للتقويم.</p><p><b>٤. عند تحديث موعد الصرف:</b> حدّث الحدث السابق في التقويم أو احذفه قبل استيراد الملف الجديد، حتى ما تصلك تنبيهات قديمة أو مكررة.</p><p><b>٥. النسخة الاحتياطية:</b> مشاركة ملف JSON وحفظه في «الملفات»، أو نسخ بيانات النسخة إلى «الملاحظات» ثم استيرادها بالنص.</p><p><b>٦. إضافة للشاشة الرئيسية:</b> إذا فتحت التطبيق من رابط ويب عبر Safari، اختر «مشاركة» ثم «إضافة إلى الشاشة الرئيسية». فتح ملف HTML من تطبيق الملفات قد لا يتيح الحفظ الدائم؛ لذلك الأفضل استخدام نسخة احتياطية أو استضافة الملف على رابط ثابت.</p></div><div class="formactions"><button class="btn btn-primary" type="button" data-action="close">فهمت</button></div>`, 'guide')}
+  function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3300)}
+  function download(text,name,mime){const blob=new Blob([text],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000)}
+  // النسخة المحلية على iPhone قد ترفض التنزيل التقليدي وتُظهر رسالة نجاح مضللة.
+  // نستخدم native Web Share (إن توفر)، مع بديل نسخ JSON نصًا واستيراده لاحقًا.
+  let backupFile=null,backupJson='',backupUrl=null;
+  function clearBackup(){
+    if(backupUrl){URL.revokeObjectURL(backupUrl);backupUrl=null}
+    backupFile=null;backupJson='';
+  }
+  function backup(){
+    clearBackup();
+    backupJson=JSON.stringify({app:'أدوية أمي',version:2,exportedAt:new Date().toISOString(),notificationDays,medicines,labs},null,2);
+    const filename='adwiyat-ummi-backup-'+today()+'.json';
+    try{
+      backupFile=new File([backupJson],filename,{type:'application/json'});
+      backupUrl=URL.createObjectURL(backupFile);
+    }catch(e){backupFile=null}
+    showModal('النسخة الاحتياطية',`<div class="formgrid">
+      <div class="calculated" style="font-weight:500;line-height:1.9">النسخة تحتوي على <b>${medicines.length} دواء</b> و<b>${labs.length} تحليل</b> مع المواعيد وسجل الصرف والموافقات. <b>لم يُحفظ أي ملف بعد.</b></div>
+      <div class="field"><label>الطريقة الأسهل على الآيفون</label><p style="margin:0;color:#607487;font-size:13px;line-height:1.9">اضغط «مشاركة ملف JSON»، ثم من قائمة مشاركة الآيفون اختر <b>حفظ في الملفات (Save to Files)</b>، واختر مكان الحفظ واضغط «حفظ».</p></div>
+      <div class="formactions" style="justify-content:stretch;margin-top:0"><button class="btn btn-primary" type="button" data-action="sharebackup">↗ مشاركة ملف JSON</button>
+        <a class="btn btn-outline" id="backupDownloadLink" download="${filename}">⇩ محاولة تنزيل JSON</a></div>
+      <div class="warningbar" style="margin:0">إذا لم يفتح الآيفون المشاركة أو لم تجد الملف بعد التنزيل، استخدم «نسخ بيانات النسخة» بالأسفل، ثم الصق النص في ملاحظة محفوظة داخل تطبيق «الملاحظات». ويمكنك استيراده لاحقًا من زر «استيراد نص نسخة».</div>
+      <button class="btn btn-outline" type="button" data-action="copybackup">⧉ نسخ بيانات النسخة</button>
+      <details><summary style="cursor:pointer;font-weight:700">عرض نص النسخة للنسخ اليدوي</summary><div class="field" style="margin-top:9px"><textarea id="backupText" readonly rows="7" dir="ltr" spellcheck="false" style="font-size:12px;direction:ltr;white-space:pre;min-height:140px"></textarea></div><button type="button" class="btn btn-soft small" data-action="selectbackup">تحديد النص كله</button></details>
+      <div class="formactions"><button type="button" class="btn btn-soft" data-action="close">إغلاق</button></div>
+    </div>`, 'backup');
+    const link=$('#backupDownloadLink');if(backupUrl){link.href=backupUrl}else{link.hidden=true}
+    $('#backupText').value=backupJson;
+  }
+  async function shareBackup(){
+    if(!backupFile)return toast('تعذّر إعداد ملف النسخة. استخدم نسخ البيانات كنص.');
+    if(!navigator.share)return toast('المشاركة غير متاحة من عرض «الملفات». استخدم خيار نسخ بيانات النسخة.');
+    try{
+      if(navigator.canShare&&!navigator.canShare({files:[backupFile]}))return toast('لا يمكن مشاركة JSON من هذا العارض. جرّب نسخ البيانات كنص.');
+      // يستدعى مباشرة من الضغط؛ لا انتظار قبل navigator.share للحفاظ على user activation.
+      await navigator.share({files:[backupFile],title:'النسخة الاحتياطية - أدوية أمي'});
+      toast('انتهت المشاركة. تأكد أنك اخترت «حفظ في الملفات» وأن الملف موجود.');
+    }catch(e){if(e?.name==='AbortError')return;toast('لم تنجح المشاركة من هذا العرض. استخدم «نسخ بيانات النسخة».')}
+  }
+  function selectBackup(){const el=$('#backupText');if(!el)return;
+    const details=el.closest('details');if(details)details.open=true;
+    el.focus();el.select();el.setSelectionRange(0,el.value.length);
+  }
+  async function copyBackup(){
+    if(!backupJson)return;
+    const ok=()=>toast('تم النسخ. الصق النص في «الملاحظات» واحفظ الملاحظة؛ هذه هي النسخة الاحتياطية.');
+    if(navigator.clipboard?.writeText){try{await navigator.clipboard.writeText(backupJson);ok();return}catch(e){}}
+    selectBackup();try{if(document.execCommand('copy')){ok();return}}catch(e){}
+    toast('لم يسمح العارض بالنسخ المباشر. النص محدد؛ اضغط «نسخ» من قائمة الآيفون.');
+  }
+  // استيراد النسخة دون window.confirm: بعض عوارض ملفات HTML على iOS لا تعرض مربعات التأكيد.
+  let pendingImport=null;
+  function prepareImport(obj){
+    if(!obj||!Array.isArray(obj.medicines)||obj.medicines.length>250||
+       (obj.labs!==undefined&&(!Array.isArray(obj.labs)||obj.labs.length>250)))throw Error('format');
+    const arr=obj.medicines.map(normalizeMed);
+    const importedLabs=Array.isArray(obj.labs)?obj.labs.map(normalizeLab):null;
+    if(arr.some(x=>!x)||new Set(arr.map(x=>x.id)).size!==arr.length||
+       (importedLabs&&(importedLabs.some(x=>!x)||new Set(importedLabs.map(x=>x.id)).size!==importedLabs.length)))throw Error('data');
+    if(arr.length===0&&(!importedLabs||importedLabs.length===0))throw Error('empty');
+    return {medicines:arr,labs:importedLabs,notificationDays:obj.notificationDays};
+  }
+  function reviewImport(obj){
+    pendingImport=prepareImport(obj);
+    const m=pendingImport.medicines.length;
+    const l=pendingImport.labs?.length;
+    const oldM=medicines.length,oldL=labs.length;
+    const legacy=pendingImport.labs===null;
+    showModal('مراجعة النسخة قبل الاستيراد',`
+      <div style="display:grid;gap:13px" id="importReviewContent">
+        <div class="calculated" style="font-size:15px;line-height:1.9">✓ تم قراءة ملف JSON بنجاح. راجع الأعداد ثم اضغط «تأكيد الاستيراد».</div>
+        <div class="two">
+          <div style="padding:15px;text-align:center;background:#f4f8fa;border-radius:12px"><div style="font-size:30px;color:#176b57;font-weight:800">${m}</div><div>دواء في النسخة</div></div>
+          <div style="padding:15px;text-align:center;background:#f4f8fa;border-radius:12px"><div style="font-size:30px;color:#176b57;font-weight:800">${legacy?'—':l}</div><div>تحليل في النسخة</div></div>
+        </div>
+        <p style="margin:0;font-size:13px;line-height:1.9;color:#586c7d">حاليًا بالتطبيق: <b>${oldM} دواء</b> و<b>${oldL} تحليل</b>.</p>
+        <div class="warningbar" style="margin:0">${legacy?'هذه النسخة لا تحتوي على تحاليل؛ سيتم استبدال الأدوية فقط مع الاحتفاظ بالتحاليل الحالية.':'تأكيد الاستيراد سيستبدل جميع الأدوية والتحاليل الموجودة بمحتويات النسخة. تأكد من عدم وجود تحديثات أحدث تريد الاحتفاظ بها.'}</div>
+        <p id="importFinalStatus" role="status" aria-live="polite" style="margin:0;font-size:13px;color:#a13341" hidden></p>
+        <div class="formactions"><button type="button" class="btn btn-soft" data-action="cancelimport">إلغاء</button><button type="button" class="btn btn-primary" data-action="confirmimport">✓ تأكيد الاستيراد</button></div>
+      </div>`, 'importreview');
+  }
+  function finishImport(){
+    if(!pendingImport){toast('لا توجد نسخة قيد المراجعة');return}
+    const pending=pendingImport;
+    try{
+      medicines=pending.medicines;
+      if(pending.labs!==null)labs=pending.labs;
+      notificationDays=[3,5,7,10,14,21].includes(Number(pending.notificationDays))?Number(pending.notificationDays):7;
+      save();pendingImport=null;closeModal();render();
+      toast(`تم استيراد ${medicines.length} دواء و${labs.length} تحليلًا بنجاح`);
+    }catch(e){
+      const msg=$('#importFinalStatus');if(msg){msg.hidden=false;msg.textContent='تعذر إكمال الاستيراد: '+String(e.message||e)}
+    }
+  }
+  function importObject(obj){reviewImport(obj);return true}
+  function importData(f){
+    if(!f)return;if(f.size>3_000_000){toast('الملف كبير جدًا');$('#importFile').value='';return}
+    const reader=new FileReader();
+    reader.onload=()=>{try{reviewImport(JSON.parse(String(reader.result)))}catch(e){toast('ملف النسخة الاحتياطية غير صالح: '+(e.message||'خطأ في البيانات'))}};
+    reader.onerror=()=>toast('تعذّر فتح ملف JSON');
+    reader.readAsText(f);$('#importFile').value='';
+  }
+  function importTextForm(){pendingImport=null;showModal('استيراد نسخة من النص',`<form id="importTextForm" class="formgrid" novalidate>
+    <p style="margin:0;color:#607487;font-size:13px;line-height:1.9">الصق النص الكامل لملف JSON هنا. ستظهر شاشة مراجعة بالأعداد قبل إجراء أي تغيير.</p>
+    <div class="field"><label for="importJsonText">الصق نص النسخة JSON</label><textarea id="importJsonText" rows="7" dir="ltr" spellcheck="false" placeholder='{ "app": "أدوية أمي", ... }' style="direction:ltr;white-space:pre;min-height:170px;font-size:13px"></textarea></div>
+    <p id="importTextError" role="alert" style="color:#b73544;background:#ffedf0;padding:11px;border-radius:9px;font-size:13px;line-height:1.7;margin:0" hidden></p>
+    <div class="formactions"><button type="button" class="btn btn-soft" data-action="close">إلغاء</button><button type="submit" class="btn btn-primary">مراجعة واستيراد</button></div>
+  </form>`, 'importtext');
+    $('#importTextForm').addEventListener('submit',ev=>{
+      ev.preventDefault();
+      const el=$('#importJsonText'),value=el.value.trim();
+      const err=$('#importTextError');err.hidden=true;err.textContent='';
+      if(!value){err.textContent='لم يتم لصق أي نص. انسخ النسخة الكاملة ثم الصقها في المربع.';err.hidden=false;return}
+      if(value.length>3_000_000){err.textContent='حجم النص أكبر من المسموح.';err.hidden=false;return}
+      try{reviewImport(JSON.parse(value))}
+      catch(e){
+        const message=e instanceof SyntaxError?'النص ليس JSON كاملًا أو يحتوي على أحرف زائدة. انسخ من بداية { إلى آخر } بالكامل.':
+          e.message==='format'?'النسخة لا تحتوي على قائمة الأدوية بالشكل المطلوب.':
+          e.message==='data'?'بعض تواريخ الأدوية أو التحاليل أو حقولها غير صالحة.':
+          e.message==='empty'?'النسخة فارغة.':`تعذّر قراءة النسخة: ${e.message||'خطأ غير معروف'}`;
+        err.textContent=message;err.hidden=false;
+      }
+    });
+  }
+  function icsEscape(s){return String(s).replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/[,;]/g,c=>'\\'+c)}
+  function clockDate(s,h){return String(s).replace(/-/g,'')+'T'+String(h).padStart(2,'0')+'0000'}
+  function makeIcs(list){const now=new Date(),stamp=now.toISOString().replace(/[-:]/g,'').replace(/\.\d+Z$/,'Z');let lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Adwiyat Ummi//Medication Refill Calendar//AR','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:أدوية أمي - '+(isLabs()?'موافقات التحاليل':'مواعيد الصرف')];
+    for(const m of list){const n=nextDate(m);const d=daysUntil(n);if(!n)continue;let eventDate=n; if(d<=0){const morning=new Date();morning.setHours(9,0,0,0);if(now>=morning){morning.setDate(morning.getDate()+1)}eventDate=iso(morning)} const dueNote=d<0?` (الموعد الأصلي ${dateText(n)} متأخر، يلزم التحقق من الصرف)` : '';
+      lines.push('BEGIN:VEVENT',`UID:adwiyat-ummi-${m.id.replace(/[^a-z0-9_-]/gi,'')}-${n.replace(/-/g,'')}@refill.local`,`DTSTAMP:${stamp}`,`DTSTART:${clockDate(eventDate,9)}`,`DTEND:${clockDate(eventDate,9).replace('T090000','T093000')}`,`SUMMARY:${icsEscape((isLabs()?'متابعة موافقة تحاليل: ':'متابعة صرف: ')+m.name)}`,`DESCRIPTION:${icsEscape((isLabs()?'موعد المتابعة الإدارية لموافقة التحليل':'موعد إعادة صرف الدواء')+dueNote+' | '+(isLabs()?'آخر موافقة: ':'آخر صرف: ')+dateText(m.last)+' | '+(m.approvalNo?'رقم الموافقة: '+m.approvalNo+' | ':'')+(m.note||''))}`);
+      for(const trigger of (d<0?['-PT0M']:['-P7D','-P3D','-PT0M']))lines.push('BEGIN:VALARM',`TRIGGER:${trigger}`,'ACTION:DISPLAY',`DESCRIPTION:${icsEscape((isLabs()?'تذكير متابعة تحليل: ':'تذكير صرف: ')+m.name)}`,'END:VALARM');lines.push('END:VEVENT')
+    }
+    lines.push('END:VCALENDAR');return lines.join('\r\n')+'\r\n';}
+  // إنشاء ملف ICS لا يعني أن iOS حفظه أو استورده. نعرض خيارات فعلية للمشاركة
+  // بالإضافة إلى المواعيد يدويًا حين لا يسمح عرض HTML المحلي بنقل الملفات.
+  let calendarFile=null,calendarObjectUrl=null,calendarList=[];
+  function calendarExportDate(m){
+    const n=nextDate(m),d=daysUntil(n);if(d>0)return n;
+    const morning=new Date();morning.setHours(9,0,0,0);
+    if(new Date()>=morning)morning.setDate(morning.getDate()+1);
+    return iso(morning);
+  }
+  function calendar(ids){
+    const list=ids?currentRecords().filter(m=>ids.includes(m.id)):currentRecords().slice();
+    if(!list.length){toast('لا توجد مواعيد تصدير');return}
+    if(calendarObjectUrl){URL.revokeObjectURL(calendarObjectUrl);calendarObjectUrl=null}
+    calendarList=list.slice().sort((a,b)=>calendarExportDate(a).localeCompare(calendarExportDate(b))||a.name.localeCompare(b.name,'ar'));
+    const filename=isLabs()?'tadkeer-mowafaqat-tahaleel.ics':ids?'tadkeer-dawa.ics':'mawaeed-sarf-adwiyat-ummi.ics';
+    try{
+      const content=makeIcs(list);
+      calendarFile=new File([content],filename,{type:'text/calendar'});
+      calendarObjectUrl=URL.createObjectURL(calendarFile);
+    }catch(e){console.warn('ICS file',e);calendarFile=null;toast('تعذر تجهيز ملف التقويم. يمكن مراجعة مواعيد الأدوية يدويًا.');return}
+    const link=$('#calendarDownloadLink');link.href=calendarObjectUrl;link.download=filename;
+    $('#calViewTitle').textContent=`مواعيد التقويم · ${list.length} ${list.length===1?labelSingular():labelPlural()}`;
+    const groups=new Map();
+    for(const m of calendarList){const key=calendarExportDate(m);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(m)}
+    $('#calendarEventList').innerHTML=[...groups.entries()].map(([d,items])=>`<section class="cal-day"><h3>${esc(dateText(d))} · الساعة ٩ صباحًا</h3><ul>${items.map(m=>`<li>${esc(m.name)}${daysUntil(nextDate(m))<0?` <span class="cal-late">(موعده الأصلي ${esc(dateText(nextDate(m)))} متأخر)</span>`:''}</li>`).join('')}</ul></section>`).join('');
+    $('#calView').hidden=false;document.body.classList.add('noscroll');
+  }
+  async function shareCalendar(){
+    if(!calendarFile){toast('لا يوجد ملف تقويم للمشاركة');return}
+    if(!navigator.share){toast('المشاركة غير متاحة عند فتح الملف بهذه الطريقة؛ جرّب حفظ ICS أو القائمة اليدوية.');return}
+    try{
+      if(navigator.canShare&&!navigator.canShare({files:[calendarFile]})){
+        toast('الآيفون لا يدعم مشاركة ICS من هذا العرض؛ جرّب حفظ الملف أو نسخ المواعيد.');return
+      }
+      // Keep navigator.share immediately after the tap; no await before invocation.
+      await navigator.share({files:[calendarFile],title:isLabs()?'متابعة موافقات تحاليل أمي':'مواعيد صرف أدوية أمي'});
+    }catch(e){
+      if(e&&e.name==='AbortError')return;
+      toast('تعذرت المشاركة من «الملفات». جرّب حفظ ICS أو استخدم القائمة اليدوية.')
+    }
+  }
+  function copyCalendarList(){
+    if(!calendarList.length)return;
+    const text=[isLabs()?'أدوية أمي — متابعة موافقات التحاليل':'أدوية أمي — مواعيد الصرف',...calendarList.map(m=>`${m.name} — ${dateText(calendarExportDate(m))} الساعة ٩ صباحًا${daysUntil(nextDate(m))<0?` (موعده السابق ${dateText(nextDate(m))} متأخر)`:''}`)].join('\n');
+    const success=()=>toast('تم نسخ قائمة المواعيد');
+    const fallback=()=>{
+      const el=document.createElement('textarea');el.value=text;el.style.position='fixed';el.style.opacity='0';document.body.appendChild(el);el.focus();el.select();
+      try{if(document.execCommand('copy'))success();else toast('يمكنك الرجوع للقائمة ونسخ المواعيد يدويًا')}catch(e){toast('يمكنك الرجوع للقائمة ونسخ المواعيد يدويًا')}
+      el.remove();
+    };
+    if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(success).catch(fallback);
+    else fallback();
+  }
+  function closeCalendar(){
+    $('#calView').hidden=true;document.body.classList.remove('noscroll');
+    if(calendarObjectUrl){URL.revokeObjectURL(calendarObjectUrl);calendarObjectUrl=null}
+    $('#calendarDownloadLink').removeAttribute('href');calendarFile=null;calendarList=[];
+  }
+
+
+  // رسم البطاقات على Canvas مباشرة؛ دون نوافذ جديدة أو مكتبات خارجية أو HTML-to-image،
+  // لأن تلك الطرق قد لا تعمل عند فتح التطبيق المحلي من «الملفات» على iOS.
+  let imageObjectUrl=null;
+  function rectRound(ctx,x,y,w,h,r,fill,border){
+    ctx.beginPath();const rr=Math.min(r,w/2,h/2);
+    ctx.moveTo(x+rr,y);ctx.lineTo(x+w-rr,y);ctx.quadraticCurveTo(x+w,y,x+w,y+rr);
+    ctx.lineTo(x+w,y+h-rr);ctx.quadraticCurveTo(x+w,y+h,x+w-rr,y+h);
+    ctx.lineTo(x+rr,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-rr);
+    ctx.lineTo(x,y+rr);ctx.quadraticCurveTo(x,y,x+rr,y);
+    ctx.closePath();if(fill){ctx.fillStyle=fill;ctx.fill()}if(border){ctx.lineWidth=1;ctx.strokeStyle=border;ctx.stroke()}
+  }
+  function fitText(ctx,s,width){
+    const text=String(s??'');if(ctx.measureText(text).width<=width)return text;
+    const dots='…';let lo=0,hi=text.length;
+    while(lo<hi){const mid=Math.ceil((lo+hi)/2);if(ctx.measureText(text.slice(0,mid)+dots).width<=width)lo=mid;else hi=mid-1}
+    return text.slice(0,lo)+dots;
+  }
+  function wrapLines(ctx,raw,maxWidth,maxLines=3){
+    const text=String(raw||'').replace(/\s+/g,' ').trim();
+    if(!text)return [];
+    const words=text.split(' '),lines=[];let line='';
+    for(let i=0;i<words.length;i++){
+      const proposed=line?line+' '+words[i]:words[i];
+      if(ctx.measureText(proposed).width<=maxWidth){line=proposed;continue}
+      if(line){lines.push(line);line='';if(lines.length>=maxLines){lines[maxLines-1]=fitText(ctx,lines[maxLines-1]+' '+words.slice(i).join(' '),maxWidth);return lines}}
+      if(ctx.measureText(words[i]).width<=maxWidth){line=words[i]}
+      else {
+        let rest=words[i];
+        while(rest){
+          let k=1;
+          while(k<rest.length&&ctx.measureText(rest.slice(0,k+1)).width<=maxWidth)k++;
+          lines.push(rest.slice(0,k));rest=rest.slice(k);
+          if(lines.length>=maxLines){if(rest||i<words.length-1)lines[maxLines-1]=fitText(ctx,lines[maxLines-1]+' '+rest+' '+words.slice(i+1).join(' '),maxWidth);return lines}
+        }
+      }
+    }
+    if(line)lines.push(line);
+    return lines;
+  }
+  function makeMedicationImage(list,filterLabel,query){
+    const W=1080,outer=30,gap=15,cardW=(W-outer*2-gap)/2;
+    const font='-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif';
+    const pre=document.createElement('canvas').getContext('2d');pre.direction='rtl';
+    const decorated=list.map(m=>{
+      pre.font=`800 25px ${font}`;
+      const names=wrapLines(pre,m.name,cardW-240,3);
+      pre.font=`400 15px ${font}`;
+      const notes=wrapLines(pre,m.note,cardW-55,2);
+      const cardHeight=Math.max(182,146+names.length*28+notes.length*18);
+      return {m,names,notes,cardHeight};
+    });
+    const rows=[];
+    for(let i=0;i<decorated.length;i+=2){
+      const pair=decorated.slice(i,i+2);
+      rows.push({items:pair,height:Math.max(...pair.map(c=>c.cardHeight))});
+    }
+    const headerBottom=142,footerH=34;
+    const H=headerBottom+rows.reduce((a,r)=>a+r.height,0)+Math.max(0,rows.length-1)*gap+footerH;
+    // Cap canvas physical dimensions to support iOS canvas limits, while preserving ALL cards.
+    const pixelRatio=Math.min(2,(8192/Math.max(W,H)),(16777216/(W*H))**.5);
+    const scale=Math.max(.2,pixelRatio);
+    const canvas=document.createElement('canvas');
+    canvas.width=Math.max(1,Math.round(W*scale));canvas.height=Math.max(1,Math.round(H*scale));
+    const ctx=canvas.getContext('2d');if(!ctx)throw Error('لا يمكن إنشاء الصورة على هذا الجهاز');
+    ctx.scale(scale,scale);ctx.direction='rtl';ctx.textBaseline='top';
+    ctx.fillStyle='#f5f7fa';ctx.fillRect(0,0,W,H);
+    rectRound(ctx,10,10,W-20,H-20,24,'#ffffff');
+    // App header
+    rectRound(ctx,W-outer-60,33,56,56,17,'#dcedee');
+    ctx.font=`800 32px ${font}`;ctx.textAlign='right';ctx.fillStyle='#203348';
+    ctx.fillText('أدوية أمي',W-outer-77,29);
+    ctx.font=`500 16px ${font}`;ctx.fillStyle='#748091';
+    const caption=`${filterLabel}${query?' • البحث: '+query:''} • ${list.length} بطاقة`;
+    ctx.fillText(fitText(ctx,caption,610),W-outer-77,70);
+    ctx.textAlign='left';ctx.font=`500 15px ${font}`;ctx.fillStyle='#66798a';
+    ctx.fillText('تاريخ التصدير: '+dateText(today()),outer,45);
+    ctx.textAlign='right';ctx.fillStyle='#e7edf2';ctx.fillRect(outer,116,W-outer*2,1);
+    function card(item,x,y,h){
+      const {m,names,notes}=item,w=cardW,cls=tier(m.remaining);
+      const states={overdue:{stripe:'#d95565',bg:'#ffedf0',ink:'#b73544',next:'#fff0f2'},today:{stripe:'#c4404b',bg:'#ffedf0',ink:'#b73544',next:'#fff0f2'},soon:{stripe:'#e6a448',bg:'#fff2de',ink:'#a75c00',next:'#fff5e8'},later:{stripe:'#abc8d7',bg:'#ecf4fc',ink:'#315f88',next:'#eef6f3'}};
+      const s=states[cls],last=(m.remaining<0?'overdue':cls);
+      ctx.save();ctx.shadowColor='rgba(25,48,73,.065)';ctx.shadowBlur=15;ctx.shadowOffsetY=5;
+      rectRound(ctx,x,y,w,h,18,'#fff');ctx.restore();
+      rectRound(ctx,x,y,w,h,18,null,'#e5ecef');
+      rectRound(ctx,x+w-7,y+12,4,h-24,3,s.stripe);
+      ctx.font=`800 25px ${font}`;ctx.fillStyle='#1d2d3f';ctx.textAlign='right';
+      names.forEach((l,i)=>ctx.fillText(l,x+w-23,y+18+i*29));
+      ctx.font=`400 15px ${font}`;ctx.fillStyle='#758394';
+      notes.forEach((l,i)=>ctx.fillText(l,x+w-23,y+24+names.length*29+i*19));
+      const status=humanDays(m.remaining);ctx.font=`700 17px ${font}`;
+      const pillW=Math.min(w-250,ctx.measureText(status).width+30);
+      rectRound(ctx,x+15,y+16,pillW,36,18,s.bg);
+      ctx.textAlign='center';ctx.fillStyle=s.ink;ctx.fillText(status,x+15+pillW/2,y+24);
+      const inner=16,dateGap=8,dateW=(w-inner*2-dateGap)/2,dateY=y+h-88;
+      rectRound(ctx,x+inner,dateY,dateW,72,11,s.next);
+      rectRound(ctx,x+inner+dateW+dateGap,dateY,dateW,72,11,'#f7f9fb');
+      ctx.textAlign='right';ctx.font=`400 16px ${font}`;ctx.fillStyle='#788799';
+      ctx.fillText(isLabs()?'آخر موافقة':'آخر صرف',x+w-inner-12,dateY+10);
+      ctx.fillText(isLabs()?'الموعد القادم':'الصرف القادم',x+inner+dateW-12,dateY+10);
+      ctx.font=`800 20px ${font}`;ctx.fillStyle='#1d2d3f';
+      const maxDate=dateW-22;
+      ctx.fillText(fitText(ctx,dateText(m.last),maxDate),x+w-inner-12,dateY+36);
+      ctx.fillText(fitText(ctx,dateText(m.next),maxDate),x+inner+dateW-12,dateY+36);
+    }
+    let y=headerBottom;
+    rows.forEach(row=>{
+      row.items.forEach((item,i)=>card(item,i===0?outer+cardW+gap:outer,y,row.height));
+      y+=row.height+gap;
+    });
+    ctx.font=`400 14px ${font}`;ctx.fillStyle='#8492a0';ctx.textAlign='center';
+    ctx.fillText(isLabs()?'متابعة موافقات التحاليل • موعد المتابعة كل ٣ أشهر':'متابعة مواعيد إعادة صرف الأدوية • التواريخ ميلادية',W/2,H-25);
+    return canvas;
+  }
+  function closeImageView(){
+    $('#imageView').hidden=true;document.body.classList.remove('noscroll');
+    // Keep URL while preview is shown; dispose when dismissed.
+    $('#imagePreview').removeAttribute('src');$('#imageDownloadLink').removeAttribute('href');
+    if(imageObjectUrl){URL.revokeObjectURL(imageObjectUrl);imageObjectUrl=null}
+  }
+  function imagePage(){
+    const {filtered,filterLabel,query}=visibleMeds();
+    if(!filtered.length){toast('لا توجد أدوية ظاهرة في هذا الفلتر لحفظها');return}
+    try{
+      const canvas=makeMedicationImage(filtered,filterLabel,query);
+      const filename='adwiyat-ummi-'+today()+'.png';
+      const openImage=(blob)=>{
+        if(!blob){toast('تعذر تجهيز الصورة على هذا الجهاز');return}
+        if(imageObjectUrl)URL.revokeObjectURL(imageObjectUrl);
+        imageObjectUrl=URL.createObjectURL(blob);
+        $('#imagePreview').src=imageObjectUrl;
+        const link=$('#imageDownloadLink');link.href=imageObjectUrl;link.download=filename;
+        $('#imageViewTitle').textContent=`حفظ كصورة • ${filtered.length} ${filtered.length===1?labelSingular():labelPlural()}`;
+        $('#imageView').hidden=false;document.body.classList.add('noscroll');
+        $('#imageView').dataset.imageName=filename;
+      };
+      if(canvas.toBlob)canvas.toBlob(openImage,'image/png');
+      else {const data=canvas.toDataURL('image/png');fetch(data).then(r=>r.blob()).then(openImage).catch(()=>toast('تعذر تجهيز الصورة'))}
+    }catch(e){console.error('Export image error',e);toast('تعذر إعداد الصورة، حاول مرة أخرى')}
+  }
+  async function shareImage(){
+    if(!imageObjectUrl)return;
+    try{
+      const blob=await fetch(imageObjectUrl).then(r=>r.blob());
+      const filename=$('#imageView').dataset.imageName||'adwiyat-ummi.png';
+      const file=new File([blob],filename,{type:'image/png'});
+      if(navigator.share && (!navigator.canShare||navigator.canShare({files:[file]}))){
+        await navigator.share({files:[file],title:'أدوية أمي'});return
+      }
+    }catch(e){if(e.name==='AbortError')return}
+    toast('لحفظ الصورة على الآيفون: اضغط مطولًا على الصورة واختر حفظ الصورة، أو استخدم تنزيل PNG.')
+  }
+
+  // استيراد موافقات التأمين. النص يتم تحليله محلياً على الجهاز، دون خدمات سحابية.
+  let approvalLines=[],approvalImageUrl=null;
+  const insuranceAliases=[
+    {re:/\bD[\s\-]?CURA\b/i,key:'dcura'},
+    {re:/\bEXFORGE\b/i,key:'exforge'},
+    {re:/\bJOINT\s*ACE\b/i,key:'jointace'},
+    {re:/\bOSTEO\s*CARE\b/i,key:'osteocare'},
+    {re:/\bCOBAL\b/i,key:'cobal'},
+    {re:/\bCLAZ\s*MR\b/i,key:'claz'},
+    {re:/\bOZEMPIC\b/i,key:'ozempic'},
+    {re:/\bSYNJARDY\b/i,key:'synjardy'},
+    {re:/\bIVARIN\b|\bCRESTOR\b|\bROZAVI\b/i,key:'statin'},
+    {re:/\bGLERAN\b|\bACTOS\b/i,key:'actos'},
+    {re:/\bMEVA\b|\bDUSPATALIN\w*\b|\bMEBEVERINE\b/i,key:'meva'},
+    {re:/\bSENSOR\b|الحساس/i,key:'sensor'},
+    {re:/\bRECUGEL\b/i,key:'recugel'},
+    {re:/\bHYLO[\-\s]?COMOD\b/i,key:'hylo'},
+    {re:/\bOMIPURE\b/i,key:'omipure'}
+  ];
+  function westernDigits(x){return String(x||'').replace(/[٠-٩]/g,c=>String('٠١٢٣٤٥٦٧٨٩'.indexOf(c))).replace(/[۰-۹]/g,c=>String('۰۱۲۳۴۵۶۷۸۹'.indexOf(c)))}
+  function cleanApproval(s){return westernDigits(s).replace(/[ـ\u200e\u200f\u202a-\u202e]/g,'').replace(/\r/g,'').replace(/[^\S\n]+/g,' ').trim()}
+  function approvalAlias(line){for(const a of insuranceAliases)if(a.re.test(line))return a.key;return ''}
+  function resolveApprovalMed(key){
+    const patterns={dcura:/d[\s\-]?cura/,exforge:/exforge|lotevan/,jointace:/joint\s*ace/,osteocare:/osteo\s*care/,cobal:/cobal/,claz:/claz/,ozempic:/ozempic/,synjardy:/synjardy/,statin:/ivarin|crestor|rozavi/,actos:/gleran|actos/,meva:/meva|duspatalin|mebeverine/,sensor:/الحساس|sensor/};
+    const pattern=patterns[key];return pattern?medicines.find(m=>pattern.test(m.name.toLowerCase())):null;
+  }
+  function approvalStatus(line){
+    const s=line.replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').toLowerCase();
+    if(/لم يتم الموافق|غير الموافق|لم تتم الموافق|مرفوض|غير معتمد|not approved|rejected|denied/.test(s))return 'rejected';
+    if(/موافقه جزئي|الموافقه الجزئي|جزئيه|partial/.test(s))return 'partial';
+    if(/تم الموافق|الموافقه عليها|approved/.test(s))return 'approved';
+    return '';
+  }
+  function parseInsuranceText(raw){
+    const text=cleanApproval(raw),lines=text.split('\n').map(x=>x.trim()).filter(Boolean);
+    const approvalNo=(text.match(/(?:رقم\s*(?:الموافقة|الموافقه|موافقة)|(?:approval\s*(?:no\.?|number))|#)\s*[:#]?\s*([0-9]{6,15})/i)||[])[1]||'';
+    let approvalDate='';const d=text.match(/\b(20\d{2})[\/-](\d{1,2})[\/-](\d{1,2})\b/);
+    if(d){const possible=[d[1],d[2].padStart(2,'0'),d[3].padStart(2,'0')].join('-');if(toDate(possible))approvalDate=possible}
+    const results=[];let status='unknown';
+    const isStatusHeader=(s)=>/الخدمات|خدمات موافق|الخدمه|^\s*تمت الموافقة\s*$|^\s*موافقة جزئية\s*$|services|approved services/i.test(s);
+    for(let i=0;i<lines.length;i++){
+      const line=lines[i],section=approvalStatus(line);
+      if(section&&isStatusHeader(line)){status=section;continue}
+      const key=approvalAlias(line);if(!key)continue;
+      // لا تعتبر ذكر الدواء في «سبب القرار» موافقة جديدة.
+      if(/السبب المحدد|لهذا القرار|requested quantity|الارشادات الطبية/i.test(line))continue;
+      const joined=[lines[i-1]||'',line,lines[i+1]||''].join(' ');
+      const qty=joined.match(/(?:^|\s)(\d{1,3})\s*(?:من|\/|of)\s*(\d{1,3})(?=\s|$)/i);
+      const explicit=approvalStatus(line);
+      const observed=explicit||status;
+      const m=resolveApprovalMed(key);
+      let match=results.find(r=>r.key===key);
+      if(!match){match={key,name:line,medId:m?.id||'',status:observed,qtyApproved:qty?+qty[1]:null,qtyRequested:qty?+qty[2]:null};results.push(match)}
+      else if(match.status==='unknown' && observed!=='unknown'){match.status=observed}
+      if(qty&&!match.qtyRequested){match.qtyApproved=+qty[1];match.qtyRequested=+qty[2]}
+      if(match.qtyApproved!==null&&match.qtyRequested!==null&&match.qtyApproved<match.qtyRequested&&match.status==='approved')match.status='partial';
+    }
+    return {approvalNo,approvalDate,results};
+  }
+  function approvalFingerprint(text){let h=2166136261;for(const c of cleanApproval(text)){h=Math.imul(h^c.charCodeAt(0),16777619)}return (h>>>0).toString(36)}
+  function showApproval(){
+    $('#approvalView').hidden=false;document.body.classList.add('noscroll');
+    if(!$('#approvalReceipt').value)$('#approvalReceipt').value=today();
+  }
+  function closeApproval(){
+    $('#approvalView').hidden=true;document.body.classList.remove('noscroll');
+    if(approvalImageUrl){URL.revokeObjectURL(approvalImageUrl);approvalImageUrl=null}
+    $('#approvalPreview').removeAttribute('src');$('#approvalPreview').hidden=true;
+  }
+  async function receiveApprovalImage(file){
+    if(!file||!file.type.startsWith('image/')){toast('اختر صورة بصيغة مناسبة');return}
+    if(file.size>20*1024*1024){toast('حجم الصورة كبير جدًا');return}
+    if(approvalImageUrl)URL.revokeObjectURL(approvalImageUrl);
+    approvalImageUrl=URL.createObjectURL(file);$('#approvalPreview').src=approvalImageUrl;$('#approvalPreview').hidden=false;
+    $('#approvalOCRStatus').textContent='تم استلام الصورة. محاولة قراءة النص على هذا الجهاز…';
+    // Shape Detection TextDetector غير متاح غالباً في Safari وملفات HTML المحلية.
+    if(typeof TextDetector!=='undefined'){
+      try{
+        const im=new Image();im.src=approvalImageUrl;await im.decode();const readings=await new TextDetector().detect(im);
+        const recognized=readings.map(r=>r.rawValue||'').filter(Boolean).join('\n');
+        if(recognized.trim()){$('#approvalText').value=recognized;$('#approvalOCRStatus').textContent='تم استخراج النص تلقائيًا. راجعه ثم اضغط تحليل الأدوية.';analyzeApproval();return}
+      }catch(e){}
+    }
+    $('#approvalOCRStatus').textContent='معاينة الصورة جاهزة، لكن قارئ نص الصور غير مدعوم هنا. افتح الصورة في تطبيق «الصور»، واستخدم «النص الحي / Live Text» ← «نسخ الكل»، ثم ارجع واضغط «لصق من الحافظة». لا يمكن للتطبيق المحلي قراءة النص من الصورة وحده في هذا الوضع.';
+  }
+  async function pasteApproval(){
+    try{
+      if(navigator.clipboard?.read){
+        const clips=await navigator.clipboard.read();
+        for(const item of clips){
+          for(const type of item.types){
+            if(type==='text/plain'){
+              const blob=await item.getType(type),text=await blob.text();if(text.trim()){$('#approvalText').value=text;analyzeApproval();return}
+            }
+          }
+          for(const type of item.types){
+            if(type.startsWith('image/')){await receiveApprovalImage(await item.getType(type));return}
+          }
+        }
+      }
+      if(navigator.clipboard?.readText){
+        const text=await navigator.clipboard.readText();if(text.trim()){$('#approvalText').value=text;analyzeApproval();return}
+      }
+    }catch(e){}
+    $('#approvalText').focus();toast('إذا لم يتم اللصق مباشرة، اضغط مطولًا داخل مربع النص ثم «لصق»');
+  }
+  function analyzeApproval(){
+    const raw=$('#approvalText').value;
+    if(!raw.trim()){toast('انسخ نص الموافقة أولًا من «النص الحي» في تطبيق الصور');return}
+    const parsed=parseInsuranceText(raw);approvalLines=parsed.results;
+    $('#approvalNumber').value=parsed.approvalNo;
+    $('#approvalDate').value=parsed.approvalDate;
+    if(!$('#approvalReceipt').value)$('#approvalReceipt').value=today();
+    $('#approvalResults').hidden=false;$('#approvalSaveBar').hidden=approvalLines.length===0;
+    $('#approvalRows').innerHTML=approvalLines.length?approvalLines.map((r,i)=>{
+      const m=medicines.find(m=>m.id===r.medId),isOK=r.status==='approved'||r.status==='partial',qty=r.qtyApproved===null?'لم تُقرأ':`${r.qtyApproved} من ${r.qtyRequested||'؟'}`;
+      const statusLabel=r.status==='approved'?'موافقة كاملة':r.status==='partial'?'موافقة جزئية':r.status==='rejected'?'غير موافق عليه':'حالة غير مؤكدة';
+      const c=r.status==='partial'?'partial':r.status==='rejected'?'rejected':'';
+      const missingStrength=!!(m&&/\b\d+(?:\.\d+)?\s*MG\b/i.test(r.name)&&!/\b\d+(?:\.\d+)?\s*MG\b/i.test(m.name));
+      const mismatch=!!(m&&((r.name.match(/\b\d+(?:\.\d+)?\s*MG\b/i)||[])[0])&&((m.name.match(/\b\d+(?:\.\d+)?\s*MG\b/i)||[])[0])&&((r.name.match(/\b\d+(?:\.\d+)?\s*MG\b/i)||[])[0].replace(/\s/g,'').toLowerCase()!==(m.name.match(/\b\d+(?:\.\d+)?\s*MG\b/i)||[])[0].replace(/\s/g,'').toLowerCase()));
+      return `<div class="ap-row" data-ap-row="${i}">
+        <div class="ap-row-title">${esc(m?.name||'دواء غير مسجل')} <span class="ap-flag ${c}">${statusLabel}</span></div>
+        <div class="ap-meta">في الموافقة: ${esc(r.name)}<br>الكمية المعتمدة: ${esc(qty)}${!m?' • غير موجود في سجل الأدوية':''}</div>
+        ${mismatch?'<div class="ap-need">⚠ التركيز في الموافقة يختلف عن اسم الدواء المسجل؛ يجب التحقق قبل أي تحديث.</div>':''}${missingStrength?'<div class="ap-need">⚠ تركيز الدواء مذكور في الموافقة وغير محدد في اسم السجل. تأكد أنه نفس العلاج والتركيز.</div>':''}
+        ${(r.status==='partial')?'<div class="ap-need">⚠ موافقة جزئية: راجع الكمية الفعلية ومدة الصرف.</div>':''}
+        ${isOK&&m?`<label class="ap-check"><input type="checkbox" data-ap-received="${i}"> <span><strong>تم استلام الدواء فعليًا</strong> — حدّث آخر صرف وموعده القادم (لا يتم اختياره تلقائيًا).</span></label>
+        <div class="ap-supply"><div class="field"><label>حساب الصرف القادم</label><div class="calc-switch" role="group" aria-label="طريقة حساب صرف ${esc(m.name)}">
+          <label class="calc-option"><input type="radio" name="ap-mode-${i}" data-ap-mode="${i}" value="quantity" ${packDefaults(m).packSize&&packDefaults(m).unitsPerInterval?'checked':''}><span>حسب الكمية</span></label>
+          <label class="calc-option"><input type="radio" name="ap-mode-${i}" data-ap-mode="${i}" value="duration" ${packDefaults(m).packSize&&packDefaults(m).unitsPerInterval?'':'checked'}><span>حسب المدة</span></label>
+        </div></div>
+        <div data-ap-quantity="${i}" ${packDefaults(m).packSize&&packDefaults(m).unitsPerInterval?'':'hidden'}>
+          <div class="two"><div class="field"><label>العلب المستلمة فعليًا</label><input type="number" data-ap-packs="${i}" min="1" max="500" step="1" placeholder="موافقة ${r.qtyApproved??'؟'} علب، تأكد من الاستلام"></div><div class="field"><label>وحدات كل علبة</label><input type="number" data-ap-size="${i}" min="0.01" max="10000" step="any" value="${packDefaults(m).packSize}"></div></div>
+          <div class="two"><div class="field"><label>الوحدات المستخدمة</label><input type="number" data-ap-use="${i}" min="0.01" step="any" value="${packDefaults(m).unitsPerInterval}"></div><div class="field"><label>كل كم يوم؟</label><input type="number" data-ap-period="${i}" min="1" max="365" step="1" value="${packDefaults(m).intervalDays}"></div></div>
+          <div class="supply-hint" data-ap-preview="${i}">حدد العلب التي استلمتها؛ لا تُعد الموافقة إثباتًا للاستلام.</div>
+        </div>
+        <div class="two" data-ap-duration="${i}" ${packDefaults(m).packSize&&packDefaults(m).unitsPerInterval?'hidden':''}><div class="field"><label>مدة الصرف</label><input type="number" data-ap-qty="${i}" min="1" max="1000" value="${m.qty}"></div><div class="field"><label>الوحدة</label><select data-ap-unit="${i}"><option value="days" ${m.unit==='days'?'selected':''}>يوم</option><option value="weeks" ${m.unit==='weeks'?'selected':''}>أسبوع</option><option value="months" ${m.unit==='months'?'selected':''}>شهر</option></select></div></div></div>`:''}
+        ${isOK&&!m?'<div class="ap-need">دواء جديد غير مسجل؛ أضفه إلى القائمة قبل الاستيراد أو سجله يدويًا.</div>':''}
+        ${!isOK?'<div class="ap-need">لن يتم تحديث هذا الدواء تلقائيًا.</div>':''}
+      </div>`;
+    }).join(''):'<div class="ap-caution">لم يتم العثور على أسماء أدوية يمكن التعرف عليها في النص. جرّب نسخ النص كاملًا من الصورة.</div>';
+    $('#approvalResults').scrollIntoView({behavior:'smooth',block:'start'});
+    refreshApprovalSupply();
+  }
+  function refreshApprovalSupply(){for(let i=0;i<approvalLines.length;i++){
+    const mode=$(`[data-ap-mode="${i}"]:checked`);if(!mode)continue;
+    const isQty=mode.value==='quantity';$(`[data-ap-quantity="${i}"]`).hidden=!isQty;$(`[data-ap-duration="${i}"]`).hidden=isQty;
+    if(isQty){const m=medicines.find(m=>m.id===approvalLines[i].medId),ref=packDefaults(m||{name:''});
+      const x={packCount:Number($(`[data-ap-packs="${i}"]`)?.value),packSize:Number($(`[data-ap-size="${i}"]`)?.value),unitsPerInterval:Number($(`[data-ap-use="${i}"]`)?.value),intervalDays:Number($(`[data-ap-period="${i}"]`)?.value),packUnit:ref.packUnit};
+      $(`[data-ap-preview="${i}"]`).textContent=supplyDays(x)!==null?supplyDescription(x):'أدخل عدد العلب المستلمة لاحتساب عدد الأيام (الكمية المعتمدة ليست بالضرورة المستلمة).';
+    }
+  }}
+  $('#approvalRows').addEventListener('input',refreshApprovalSupply);
+  $('#approvalRows').addEventListener('change',refreshApprovalSupply);
+  function saveApproval(){
+    if(!approvalLines.length)return;
+    const auth=westernDigits($('#approvalNumber').value.trim()),date=$('#approvalDate').value,receipt=$('#approvalReceipt').value;
+    if(date&&!toDate(date)){toast('راجع تاريخ الموافقة');return}
+    if(auth&&!/^[0-9A-Za-z\-\/]{4,30}$/.test(auth)){toast('راجع رقم الموافقة');return}
+    let updated=0,noted=0,ignored=0,duplicate=0;
+    const changes=[];
+    for(let i=0;i<approvalLines.length;i++){
+      const r=approvalLines[i],m=medicines.find(m=>m.id===r.medId);
+      if(!m||!['approved','partial'].includes(r.status)){ignored++;continue}
+      const received=$(`[data-ap-received="${i}"]`)?.checked||false;
+      if(received){
+        if(!toDate(receipt)){toast('حدد تاريخ الاستلام الفعلي');return}
+        const mode=$(`[data-ap-mode="${i}"]:checked`)?.value||'duration';
+        const useQuantity=mode==='quantity';const qty=Number($(`[data-ap-qty="${i}"]`)?.value),unit=$(`[data-ap-unit="${i}"]`)?.value;
+        const ref=packDefaults(m);
+        const x={packCount:Number($(`[data-ap-packs="${i}"]`)?.value),packSize:Number($(`[data-ap-size="${i}"]`)?.value),
+          unitsPerInterval:Number($(`[data-ap-use="${i}"]`)?.value),intervalDays:Number($(`[data-ap-period="${i}"]`)?.value),packUnit:ref.packUnit};
+        const calculated=useQuantity?supplyDays(x):null;
+        if(useQuantity&&calculated===null){toast('أدخل عدد العلب المستلمة والجرعة الصحيحة لـ '+m.name);return}
+        if(!useQuantity&&(!Number.isInteger(qty)||qty<1||qty>1000||!['days','weeks','months'].includes(unit))){toast('راجع مدة الصرف للأدوية المستلمة');return}
+        if(receipt<m.last){toast('تاريخ الاستلام أقدم من آخر صرف مسجل لـ '+m.name+'. راجع التاريخ.');return}
+        changes.push({m,r,received,qty:useQuantity?calculated:qty,unit:useQuantity?'days':unit,useQuantity,x});
+      }else changes.push({m,r,received:false});
+    }
+    if(!changes.length){toast('لا توجد موافقات معروفة لحفظها');return}
+    const alreadyNoted=[];
+    for(const {m,r,received,qty,unit,useQuantity,x} of changes){
+      const id=`موافقة تأمين${auth?' #'+auth:''}${date?' '+date:''}`;
+      const suffix=`${id}${!auth?' • رقم الموافقة غير ظاهر':''}${!date?' • تاريخ الموافقة غير ظاهر':''}${r.qtyApproved!==null?' • المعتمد '+r.qtyApproved+' من '+r.qtyRequested:''}${r.status==='partial'?' • جزئية':''}`;
+      const token=`INS:${auth||'-'}:${date||'-'}:${approvalFingerprint($('#approvalText').value)}:${r.key}:${r.qtyApproved??'-'}/${r.qtyRequested??'-'}`;
+      // لا نكرر تدوين نفس الموافقة إذا أُعيد لصقها.
+      m.history=m.history||[];
+      if(m.history.some(h=>h.note.includes(token))){duplicate++;continue}
+      if(!received){
+        m.history.push({date:date||today(),kind:'approval_only',approvalNo:auth,quantity:r.qtyApproved===null?'':`${r.qtyApproved}${r.qtyRequested!==null?' من '+r.qtyRequested:''}`,note:`${suffix} [${token}] (اعتماد فقط، لم يُؤكد الصرف)`});
+        noted++;
+      }else{
+        if(!m.history.some(h=>h.date===m.last&&(h.kind==='dispense'||/صرف سابق|تم الاستلام|تاريخ الصرف السابق/.test(h.note))))m.history.push({date:m.last,kind:'baseline',approvalNo:m.approvalNo||'',quantity:m.quantity||'',note:'صرف سابق قبل الاستلام المرتبط بالتأمين'});
+        const approvedQty=r.qtyApproved===null?'غير معلوم':`${r.qtyApproved}${r.qtyRequested!==null?' من '+r.qtyRequested:''}`;
+        const receivedQty=useQuantity?`${x.packCount} علبة × ${x.packSize} ${x.packUnit}`:`كمية الاستلام غير مدخلة (المعتمد: ${approvedQty})`;
+        const due=addDuration(receipt,qty,unit);
+        m.history.push({date:receipt,kind:'dispense',approvalNo:auth,quantity:receivedQty,packCount:useQuantity?x.packCount:null,
+          packSize:useQuantity?x.packSize:null,unitsPerInterval:useQuantity?x.unitsPerInterval:null,
+          intervalDays:useQuantity?x.intervalDays:null,packUnit:useQuantity?x.packUnit:'',nextDue:due,
+          note:`${suffix} [${token}] (تم الاستلام)`});
+        m.last=receipt;m.qty=qty;m.unit=unit;m.supplyMode=useQuantity?'quantity':'duration';
+        if(useQuantity)Object.assign(m,x);else m.packCount=null;
+        m.manualNext='';m.approvalNo=auth;m.quantity=receivedQty.slice(0,80);m.quantityUnit='';updated++;
+      }
+      m.history=m.history.slice(-100);
+      const info=`${id}${r.status==='partial'?' (جزئية)':''}`;
+      if(!m.note.includes(info))m.note=[m.note,info].filter(Boolean).join(' | ').slice(-500);
+    }
+    save();render();closeApproval();
+    const summary=`تم تحديث صرف ${updated}، وتسجيل موافقة ${noted} دون تغيير الصرف${duplicate?'، وتجاهل '+duplicate+' تكرار':''}.`;
+    toast(summary);
+  }
+  document.addEventListener('paste',ev=>{
+    if($('#approvalView').hidden)return;
+    const items=ev.clipboardData?.items||[];
+    for(const item of items){if(item.type.startsWith('image/')){const f=item.getAsFile();if(f){ev.preventDefault();receiveApprovalImage(f)}return}}
+    // لصق النص داخل textarea يعمل بالطريقة الطبيعية، وتحليله لاحقاً بالزر.
+  });
+  $('#approvalFile').addEventListener('change',e=>{receiveApprovalImage(e.target.files?.[0]);e.target.value=''});
+  document.addEventListener('click',ev=>{const dl=ev.target.closest('#backupDownloadLink');if(dl){toast('طلبنا تنزيل ملف JSON. إذا لم يظهر في «الملفات»، استخدم المشاركة أو النسخ النصي.');return}const cat=ev.target.closest('[data-category]');if(cat){switchCategory(cat.dataset.category);return}const filter=ev.target.closest('[data-filter]');if(filter){activeFilter=activeFilter===filter.dataset.filter?'all':filter.dataset.filter;render();return}const btn=ev.target.closest('[data-action]');if(!btn){const card=ev.target.closest('[data-record-id]');if(card)showHistory(card.dataset.recordId,card.dataset.recordCategory);return}const action=btn.dataset.action,id=btn.dataset.id;if(action==='add'){if(isLabs())labForm();else medForm()}else if(action==='edithistory')editHistory(id,btn.dataset.historyCategory,Number(btn.dataset.hindex));else if(action==='labedit')labForm(id);else if(action==='labapprove')labApprovalForm(id);else if(action==='edit')medForm(id);else if(action==='dispense')dispenseForm(id);else if(action==='close')closeModal();else if(action==='settings')settingForm();else if(action==='guide')guide();else if(action==='backup')backup();else if(action==='sharebackup')shareBackup();else if(action==='copybackup')copyBackup();else if(action==='selectbackup')selectBackup();else if(action==='importtext')importTextForm();else if(action==='confirmimport')finishImport();else if(action==='cancelimport'){pendingImport=null;closeModal()}else if(action==='import')$('#importFile').click();else if(action==='calendar')calendar();else if(action==='approval')showApproval();else if(action==='closeapproval')closeApproval();else if(action==='pickapproval')$('#approvalFile').click();else if(action==='pasteapproval')pasteApproval();else if(action==='analyzeapproval')analyzeApproval();else if(action==='saveapproval')saveApproval();else if(action==='closecalendar')closeCalendar();else if(action==='sharecalendar')shareCalendar();else if(action==='copycalendar')copyCalendarList();else if(action==='downloadcalendar')toast('تم طلب حفظ الملف، لكن قد يمنع تطبيق «الملفات» التنزيل. تحقق من موقع الحفظ أو جرّب المشاركة.');else if(action==='imagepage')imagePage();else if(action==='shareimage')shareImage();else if(action==='closeimage')closeImageView();else if(action==='onecalendar')calendar([id]);else if(action==='labdelete'){const lab=labs.find(x=>x.id===editing);if(lab&&confirm(`هل تريد حذف التحليل «${lab.name}» من القائمة؟`)){labs=labs.filter(x=>x.id!==editing);save();closeModal();render();toast('تم حذف التحليل')}}else if(action==='delete'){const m=medicines.find(x=>x.id===editing);if(m&&confirm(`هل تريد حذف «${m.name}» من القائمة؟`)){medicines=medicines.filter(x=>x.id!==editing);save();closeModal();render();toast('تم حذف الدواء')}}});
+  document.addEventListener('keydown',e=>{const card=e.target.closest?.('[data-record-id]');if(card&&e.target===card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showHistory(card.dataset.recordId,card.dataset.recordCategory)}});
+  $('#importFile').addEventListener('change',e=>importData(e.target.files?.[0]));$('#search').addEventListener('input',render);
+  $('#modal').addEventListener('click',e=>{if(e.target===$('#modal'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#calView').hidden)closeCalendar();else if(e.key==='Escape'&&!$('#approvalView').hidden)closeApproval();else if(e.key==='Escape'&&!$('#imageView').hidden)closeImageView();else if(e.key==='Escape'&&!$('#modal').hidden)closeModal()});
+  load();render();
+  // This PWA caches only application assets. Medical records remain in localStorage on this device.
+  if('serviceWorker' in navigator && location.protocol==='https:'){
+    window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(err=>console.warn('Offline setup unavailable:',err)));
+  }
+})();
+</script>
+</body>
+</html>
