@@ -99,6 +99,7 @@
   .settings-panels .actions{display:flex;flex-wrap:wrap;gap:8px}
   .history-edit-btn{font-size:12px;min-height:30px;padding:4px 10px;border-radius:9px;background:#e8f3ef;color:#17624d;border:1px solid #d2e5df;font-weight:800}
   .history-edit-btn:focus-visible{outline:2px solid #13775e}
+  .timeline-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.history-delete-btn{font-size:12px;min-height:30px;padding:4px 10px;border-radius:9px;background:#fff1f3;color:#a52d3d;border:1px solid #f0d0d5;font-weight:800}.record-image{display:block;max-width:min(100%,360px);max-height:260px;object-fit:contain;border-radius:12px;border:1px solid #e2e9ed;background:#f7f9fa;margin-top:10px}.record-image-link{display:inline-block}.record-attachment input[type=file]{width:100%;border:1px solid #dce5eb;border-radius:11px;padding:9px;background:#fff}.attachment-preview{font-size:12px;color:#82909c;margin-top:6px}
   .history-editor-hint{font-size:12px;line-height:1.8;color:#647d8b;background:#f1f6f7;padding:10px;border-radius:11px}
   .section-heading{margin-bottom:12px}
 
@@ -318,7 +319,7 @@
         <label class="calc-option"><input type="radio" name="calcMode" value="duration" ${mode==='duration'?'checked':''}><span>حسب المدة</span></label>
       </div></div>
       <div id="supplyQuantity" class="quantity-params" ${mode==='quantity'?'':'hidden'}>
-        <div class="two"><div class="field"><label>عدد العلب المستلمة</label><input type="number" name="packCount" min="1" max="500" step="1" value="${x.packCount}" placeholder="مثال: 3"><span class="supply-help">عدد العلب التي استلمتها فعلًا، وليس المعتمدة فقط</span></div><div class="field"><label>عدد الوحدات في كل علبة</label><input type="number" name="packSize" min="0.01" max="10000" step="any" value="${x.packSize}" placeholder="مثال: 28"></div></div>
+        <div class="two"><div class="field"><label>الكمية المستلمة</label><input type="number" name="packCount" min="1" max="500" step="1" value="${x.packCount}" placeholder="مثال: 3"><span class="supply-help">أدخل عدد العلب التي استلمتها فعلًا</span></div><div class="field"><label>عدد الوحدات في كل علبة</label><input type="number" name="packSize" min="0.01" max="10000" step="any" value="${x.packSize}" placeholder="مثال: 28"></div></div>
         <div class="field"><label>نوع الوحدة في العلبة</label><select name="packUnit">${options}</select></div>
         <div class="two"><div class="field"><label>عدد الوحدات المستخدمة</label><input type="number" name="unitsPerInterval" min="0.01" max="100" step="any" value="${x.unitsPerInterval}" placeholder="1 أو 2"></div><div class="field"><label>كل كم يوم؟</label><input type="number" name="intervalDays" min="1" max="365" step="1" value="${x.intervalDays}" placeholder="1 أو 7"></div></div>
         <div class="supply-hint">حبة مرة يوميًا = 1 كل 1 يوم • مرتين يوميًا = 2 كل 1 يوم • مرة أسبوعيًا = 1 كل 7 أيام.</div>
@@ -345,14 +346,14 @@
   function humanDays(n){if(n<0)return `متأخر ${Math.abs(n)} ${Math.abs(n)===1?'يوم':Math.abs(n)===2?'يومين':'أيام'}`;if(n===0)return 'موعده اليوم';if(n===1)return 'باقي يوم واحد';if(n===2)return 'باقي يومان';return `باقي ${n} أيام`}
   function tier(n){return n<0?'overdue':n===0?'today':n<=notificationDays?'soon':'later'}
   function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-  function normalizeHistory(h){return {date:h.date,note:String(h.note||'').slice(0,500),approvalNo:String(h.approvalNo||'').slice(0,80),quantity:String(h.quantity??'').slice(0,80),quantityUnit:String(h.quantityUnit||'').slice(0,45),packCount:positiveNum(h.packCount),packSize:positiveNum(h.packSize),unitsPerInterval:positiveNum(h.unitsPerInterval),intervalDays:positiveNum(h.intervalDays),packUnit:String(h.packUnit||'').slice(0,30),nextDue:toDate(h.nextDue)?h.nextDue:'',kind:['dispense','approval','approval_only','baseline'].includes(h.kind)?h.kind:'legacy'}}
+  function normalizeHistory(h){const imageData=String(h.imageData||'');return {date:h.date,note:String(h.note||'').slice(0,500),approvalNo:String(h.approvalNo||'').slice(0,80),quantity:String(h.quantity??'').slice(0,80),quantityUnit:String(h.quantityUnit||'').slice(0,45),packCount:positiveNum(h.packCount),packSize:positiveNum(h.packSize),unitsPerInterval:positiveNum(h.unitsPerInterval),intervalDays:positiveNum(h.intervalDays),packUnit:String(h.packUnit||'').slice(0,30),imageData:/^data:image\/(jpeg|png|webp);base64,/i.test(imageData)&&imageData.length<=500000?imageData:'',nextDue:toDate(h.nextDue)?h.nextDue:'',kind:['dispense','approval','approval_only','baseline'].includes(h.kind)?h.kind:'legacy'}}
   function historyOf(x){return Array.isArray(x.history)?x.history.filter(h=>h&&toDate(h.date)).slice(-100).map(normalizeHistory):[]}
-  function normalizeMed(x){ if(!x||typeof x!=='object'||!String(x.name||'').trim()||!toDate(x.last))return null;const unit=['days','weeks','months'].includes(x.unit)?x.unit:'months',qty=Number(x.qty);if(!Number.isInteger(qty)||qty<1||qty>1000)return null;return {id:String(x.id||cryptoId()),name:String(x.name).trim().slice(0,180),last:x.last,qty,unit,note:String(x.note||'').slice(0,500),approvalNo:String(x.approvalNo||'').slice(0,80),quantity:String(x.quantity??'').slice(0,80),quantityUnit:String(x.quantityUnit||'').slice(0,45),manualNext:toDate(x.manualNext)?x.manualNext:'',supplyMode:x.supplyMode==='quantity'?'quantity':'duration',packCount:positiveNum(x.packCount),packSize:positiveNum(x.packSize),unitsPerInterval:positiveNum(x.unitsPerInterval),intervalDays:positiveNum(x.intervalDays),packUnit:String(x.packUnit||'').slice(0,30),history:historyOf(x)} }
+  function normalizeMed(x){ if(!x||typeof x!=='object'||!String(x.name||'').trim()||!toDate(x.last))return null;const unit=['days','weeks','months'].includes(x.unit)?x.unit:'months',qty=Number(x.qty);if(!Number.isInteger(qty)||qty<1||qty>1000)return null;return {id:String(x.id||cryptoId()),name:String(x.name).trim().slice(0,180),last:x.last,qty,unit,note:String(x.note||'').slice(0,500),approvalNo:String(x.approvalNo||'').slice(0,80),quantity:String(x.quantity??'').slice(0,80),quantityUnit:String(x.quantityUnit||'').slice(0,45),manualNext:toDate(x.manualNext)?x.manualNext:'',supplyMode:x.supplyMode==='quantity'?'quantity':'duration',packCount:positiveNum(x.packCount),packSize:positiveNum(x.packSize),unitsPerInterval:positiveNum(x.unitsPerInterval),intervalDays:positiveNum(x.intervalDays),packUnit:String(x.packUnit||'').slice(0,30),suppressCurrentHistory:!!x.suppressCurrentHistory,history:historyOf(x)} }
   // التحاليل لا تتبع صرف الأدوية: تاريخ الموافقة + 3 أشهر من نفس اليوم.
   function normalizeLab(x){
     if(!x||typeof x!=='object'||!String(x.name||'').trim()||!toDate(x.last))return null;
     const history=historyOf(x);
-    return {id:String(x.id||cryptoId()),name:String(x.name).trim().slice(0,180),last:x.last,qty:3,unit:'months',note:String(x.note||'').slice(0,500),approvalNo:String(x.approvalNo||'').slice(0,60),quantity:String(x.quantity??'').slice(0,80),manualNext:toDate(x.manualNext)?x.manualNext:'',history};
+    return {id:String(x.id||cryptoId()),name:String(x.name).trim().slice(0,180),last:x.last,qty:3,unit:'months',note:String(x.note||'').slice(0,500),approvalNo:String(x.approvalNo||'').slice(0,60),quantity:String(x.quantity??'').slice(0,80),manualNext:toDate(x.manualNext)?x.manualNext:'',suppressCurrentHistory:!!x.suppressCurrentHistory,history};
   }
   function currentRecords(){return activeCategory==='labs'?labs:medicines}
   function isLabs(){return activeCategory==='labs'}
@@ -380,7 +381,7 @@
     const currentPresent=all.some(h=>h.date===record.last &&
       (laboratory ? (h.kind==='approval'||(/موافقة/.test(h.note)&&h.kind!=='approval_only'))
                   : (h.kind==='dispense'||/تم الاستلام/.test(h.note))));
-    if(!currentPresent)all.push({date:record.last,approvalNo:record.approvalNo||'',quantity:record.quantity||'',quantityUnit:record.quantityUnit||'',kind:laboratory?'approval':'dispense',note:'',_current:true});
+    if(!currentPresent&&!record.suppressCurrentHistory)all.push({date:record.last,approvalNo:record.approvalNo||'',quantity:record.quantity||'',quantityUnit:record.quantityUnit||'',kind:laboratory?'approval':'dispense',note:'',_current:true});
     all.sort((a,b)=>b.date.localeCompare(a.date)||Number(b._current||0)-Number(a._current||0)||b._index-a._index);
     return all;
   }
@@ -396,7 +397,8 @@
       return `<section class="timeline-item ${current?'current':''} ${approvalOnly?'approval-only':''}">
         <div class="timeline-top"><span class="timeline-date">${esc(dateText(e.date))}</span><span class="timeline-kind">${current?'الأحدث · ':''}${title}</span><button type="button" class="history-edit-btn" data-action="edithistory" data-id="${esc(record.id)}" data-history-category="${lab?'labs':'meds'}" data-hindex="${e._current?'-1':e._index}" >✎ تعديل السجل</button></div>
         <div class="timeline-fields"><div><label>رقم الموافقة</label><strong>${approval?esc(approval):'غير مسجل'}</strong></div><div><label>${lab?'الكمية / عدد التحاليل':'الكمية المستلمة / المعتمدة'}</label><strong>${quantity?esc(quantity):'غير مسجلة'}</strong></div></div>
-        ${!lab&&e.nextDue?`<p class="timeline-note">موعد المتابعة المحسوب وقت الصرف: ${esc(dateText(e.nextDue))}${supplyDays(e)?` • تغطية ${supplyDays(e)} يومًا`:''}</p>`:''}${note?`<p class="timeline-note">${esc(note)}</p>`:''}
+        ${!lab&&e.nextDue?`<p class="timeline-note">موعد المتابعة المحسوب وقت الصرف: ${esc(dateText(e.nextDue))}${supplyDays(e)?` • تغطية ${supplyDays(e)} يومًا`:''}</p>`:''}${note?`<p class="timeline-note">${esc(note)}</p>`:''}${e.imageData?`<a class="record-image-link" href="${e.imageData}" target="_blank" rel="noopener"><img class="record-image" src="${e.imageData}" alt="الصورة المرفقة بالسجل"></a>`:''}
+        <div class="timeline-actions"><button type="button" class="history-edit-btn" data-action="edithistory" data-id="${esc(record.id)}" data-history-category="${lab?'labs':'meds'}" data-hindex="${e._current?'-1':e._index}">✎ تعديل السجل</button><button type="button" class="history-delete-btn" data-action="deletehistory" data-id="${esc(record.id)}" data-history-category="${lab?'labs':'meds'}" data-hindex="${e._current?'-1':e._index}">حذف السجل</button></div>
       </section>`;
     }).join('');
     showModal(`سجل ${lab?'موافقات التحليل':'صرف الدواء'} · ${record.name}`,`
@@ -405,6 +407,7 @@
       <div class="formactions"><button class="btn btn-outline" type="button" data-action="${lab?'labedit':'edit'}" data-id="${esc(record.id)}">✎ تعديل البيانات</button><button type="button" class="btn btn-primary" data-action="close">إغلاق</button></div>
     `,'history',id);
   }
+  function deleteHistory(id,category,index){const lab=category==='labs',record=(lab?labs:medicines).find(x=>x.id===id);if(!record)return;const entries=historyOf(record),entry=index===-1?null:entries[index];if(index!==-1&&!entry)return;const what=lab?'الموافقة':'الصرف';if(!confirm(`هل تريد حذف هذا السجل من تاريخ ${lab?'الموافقات':'الصرف'}؟ ستبقى بيانات الموعد الحالية كما هي.`))return;if(index===-1)record.suppressCurrentHistory=true;else{record.history.splice(index,1);if(entry.date===record.last&&(lab?entry.kind==='approval':entry.kind==='dispense'))record.suppressCurrentHistory=true}save();render();showHistory(id,category);toast(`تم حذف سجل ${what}`)}
   function editHistory(id,category,index){
     const lab=category==='labs';const record=(lab?labs:medicines).find(x=>x.id===id);if(!record)return;
     const synthetic=index===-1;
@@ -419,16 +422,17 @@
     showModal(`تعديل سجل ${lab?'الموافقة':'الصرف'} · ${record.name}`,`<form id="editHistoryForm" class="formgrid">
       <div class="history-editor-hint">${activeEntry?'هذا هو السجل الأحدث، وسيتم تحديث البطاقة وموعد المتابعة عند حفظ تغييره.':'تعديل هذا السجل السابق لن يغيّر موعد الصرف أو الموافقة الأحدث.'} لا تُغيّر الجرعة إلا لتصحيح ما كان مسجلًا وقت الصرف، وليس لتعديل تعليمات الطبيب.</div>
       ${formField(lab?'تاريخ الموافقة':'تاريخ العملية','date',e.date,'date','required')}
-      <div class="two">${formField('رقم الموافقة (اختياري)','approvalNo',e.approvalNo,'text','maxlength="80"')}${formField(lab?'الكمية / عدد التحاليل':'الكمية المصروفة','quantity',e.quantity,'text','maxlength="80"')}</div>
-      ${lab?'':`<div class="two">${formField('عدد العلب المستلمة','packCount',e.packCount||'','number','min="1" max="500" step="1"')}${formField('الوحدات في العلبة','packSize',e.packSize||'','number','min="0.01" max="10000" step="any"')}</div>
+      <div class="two">${formField('رقم الموافقة (اختياري)','approvalNo',e.approvalNo,'text','maxlength="80"')}${lab?formField('الكمية / عدد التحاليل','quantity',e.quantity,'text','maxlength="80"'):''}</div>
+      ${lab?'':`<div class="two">${formField('الكمية المستلمة','packCount',e.packCount||'','number','min="1" max="500" step="1"')}${formField('الوحدات في العلبة','packSize',e.packSize||'','number','min="0.01" max="10000" step="any"')}</div>
       <div class="two">${formField('عدد الوحدات المستخدمة','unitsPerInterval',e.unitsPerInterval||'','number','min="0.01" max="100" step="any"')}${formField('كل كم يوم؟','intervalDays',e.intervalDays||'','number','min="1" max="365" step="1"')}</div>
       <div class="field"><label>نوع الوحدة</label><select name="packUnit">${unitOptions.map(v=>`<option value="${v}" ${v===initialUnit?'selected':''}>${v}</option>`).join('')}</select></div>`}
       ${formField('الموعد القادم المسجل (اختياري)','nextDue',e.nextDue|| (activeEntry?nextDate(record):''),'date')}
       <div class="field"><label>ملاحظات السجل</label><textarea name="note" maxlength="500">${esc(e.note)}</textarea></div>
+      ${attachmentMarkup(e.imageData)}
       <div class="formactions"><button type="button" class="btn btn-soft" data-action="close">إلغاء</button><button type="submit" class="btn btn-primary">حفظ تعديل السجل</button></div>
       </form>`, 'edithistory',id);
     $('#editHistoryForm').addEventListener('submit',ev=>{
-      ev.preventDefault();const f=ev.currentTarget,date=f.elements.date.value,auth=f.elements.approvalNo.value.trim(),quantity=f.elements.quantity.value.trim(),nextDue=f.elements.nextDue.value;
+      ev.preventDefault();const f=ev.currentTarget,date=f.elements.date.value,auth=f.elements.approvalNo.value.trim(),quantity=lab?f.elements.quantity.value.trim():e.quantity,nextDue=f.elements.nextDue.value;
       if(!toDate(date)||(nextDue&&(!toDate(nextDue)||nextDue<=date))){toast('راجع التاريخ والموعد القادم');return}
       if(!activeEntry&&date>record.last){toast('هذا تاريخ أحدث من آخر عملية؛ استخدم تسجيل صرف أو موافقة جديدة بدل تعديل سجل قديم');return}
       const params=lab?{}:{packCount:positiveNum(f.elements.packCount.value),packSize:positiveNum(f.elements.packSize.value),unitsPerInterval:positiveNum(f.elements.unitsPerInterval.value),intervalDays:positiveNum(f.elements.intervalDays.value),packUnit:f.elements.packUnit.value};
@@ -440,11 +444,11 @@
       const sameDose=lab||(['packCount','packSize','unitsPerInterval','intervalDays'].every(k=>!params[k])||
         ['packCount','packSize','unitsPerInterval','intervalDays'].every(k=>Number(params[k])===Number(record[k])));
       const keepOldManual=!dueManuallyEdited&&date===e.date&&sameDose;
-      const updated=normalizeHistory({...e,date,approvalNo:auth,quantity,nextDue,note:f.elements.note.value,...params});
+      const updated=normalizeHistory({...e,date,approvalNo:auth,quantity:lab?quantity:(params.packCount?`${params.packCount} علبة × ${params.packSize} ${params.packUnit}`:e.quantity),nextDue,note:f.elements.note.value,imageData:f.elements.attachmentData.value,...params});
       if(synthetic)record.history.push(updated);else record.history[index]=updated;
       record.history=record.history.slice(-100);
       if(activeEntry){
-        record.last=date;record.approvalNo=auth;record.quantity=quantity;
+        record.last=date;record.approvalNo=auth;record.quantity=updated.quantity;record.suppressCurrentHistory=false;
         if(lab){const calculated=addDuration(date,3,'months');record.manualNext=keepOldManual?oldManualNext:(dueManuallyEdited&&nextDue&&nextDue!==calculated?nextDue:'')}
         else {const days=supplyDays(params);
           if(days!==null){Object.assign(record,params);record.qty=days;record.unit='days';record.supplyMode='quantity'}
@@ -455,7 +459,7 @@
         updated.nextDue=nextDate(record);
       }
       save();closeModal();render();showHistory(id,category);toast('تم تعديل السجل وحفظه');
-    });
+    });wireAttachment($('#editHistoryForm'),e.imageData);
   }
   function render(){const parsed=parsedMeds(),records=currentRecords();const late=parsed.filter(m=>m.remaining<=0).length,soon=parsed.filter(m=>m.remaining>0&&m.remaining<=notificationDays).length;
     $('#countAll').textContent=records.length;$('#countLate').textContent=late;$('#countSoon').textContent=soon;$('#countLater').textContent=records.length-late-soon;$('#tabMedCount').textContent=`(${medicines.length})`;$('#tabLabCount').textContent=`(${labs.length})`;$('#countAll').closest('button').querySelector('.label').textContent=isLabs()?'إجمالي التحاليل':'إجمالي الأدوية';
@@ -473,6 +477,9 @@
   function showModal(title,html,type,id){mode=type;editing=id||null;modalFocus=document.activeElement;$('#modalHeading').textContent=title;$('#modalContent').innerHTML=html;$('#modal').hidden=false;document.body.classList.add('noscroll');setTimeout(()=>$('#modalContent input:not([type="checkbox"]), #modalContent button, #modalContent select')?.focus(),0)}
   function closeModal(){if(mode==='backup')clearBackup();$('#modal').hidden=true;document.body.classList.remove('noscroll');editing=null;mode='';modalFocus?.focus?.()}
   function formField(label,name,val='',type='text',extra=''){return `<div class="field"><label for="f_${name}">${label}</label><input id="f_${name}" name="${name}" type="${type}" value="${esc(val)}" ${extra}></div>`}
+  function attachmentMarkup(data=''){return `<div class="field record-attachment"><label>صورة مرفقة بالسجل (اختياري)</label><input type="file" name="attachmentFile" accept="image/*" capture="environment"><input type="hidden" name="attachmentData" value="${esc(data)}"><div class="attachment-preview" data-attachment-preview>${data?`<img class="record-image" src="${data}" alt="الصورة المرفقة"><button type="button" class="history-delete-btn" data-action="clearattachment">إزالة الصورة</button>`:'لم يتم إرفاق صورة'}</div><span class="helper">تُحفظ الصورة مع السجل داخل النسخة المحلية والاحتياطية.</span></div>`}
+  async function compressAttachment(file){if(!file||!file.type.startsWith('image/'))throw Error('اختر ملف صورة');const img=await new Promise((resolve,reject)=>{const url=URL.createObjectURL(file),el=new Image();el.onload=()=>{URL.revokeObjectURL(url);resolve(el)};el.onerror=()=>{URL.revokeObjectURL(url);reject(Error('تعذرت قراءة الصورة'))};el.src=url});const scale=Math.min(1,1200/Math.max(img.naturalWidth,img.naturalHeight)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);return await new Promise((resolve,reject)=>canvas.toBlob(blob=>{if(!blob)return reject(Error('تعذر ضغط الصورة'));const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(Error('تعذر تجهيز الصورة'));reader.readAsDataURL(blob)},'image/jpeg',.72))}
+  function wireAttachment(form,initial=''){const file=form?.elements.attachmentFile,data=form?.elements.attachmentData,preview=form?.querySelector('[data-attachment-preview]');if(!file||!data||!preview)return;file.addEventListener('change',async()=>{const chosen=file.files?.[0];if(!chosen)return;try{const encoded=await compressAttachment(chosen);if(encoded.length>500000)throw Error('حجم الصورة بعد الضغط ما زال كبيرًا');data.value=encoded;preview.innerHTML=`<img class="record-image" src="${encoded}" alt="الصورة المرفقة"><button type="button" class="history-delete-btn" data-action="clearattachment">إزالة الصورة</button>`;toast('تم إرفاق الصورة بالسجل')}catch(err){file.value='';toast(err.message||'تعذر إرفاق الصورة')}});form.addEventListener('click',ev=>{if(!ev.target.closest('[data-action="clearattachment"]'))return;ev.preventDefault();data.value='';file.value='';preview.textContent='لم يتم إرفاق صورة'})}
   function medForm(id){
     const m=id?medicines.find(x=>x.id===id):{name:'',last:today(),qty:3,unit:'months',note:'',manualNext:'',supplyMode:'duration',history:[]};if(!m)return;
     showModal(id?'تعديل بيانات الدواء':'إضافة دواء جديد',`<form id="medicineForm" class="formgrid">
@@ -525,13 +532,14 @@
     const edit={...m,...inherited,supplyMode:canCalculate?(m.supplyMode==='duration'?'duration':'quantity'):'duration'};
     showModal(`تسجيل صرف · ${m.name}`,`<form id="dispenseForm" class="formgrid">
       ${formField('تاريخ استلام الدواء فعليًا','date',today(),'date','required')}
-      <div class="supply-hint">تم تعبئة بيانات آخر صرف تلقائيًا إن كانت مسجلة؛ راجع العلب والجرعة قبل التأكيد، ولا تنسَ إدخال رقم الموافقة الجديدة.</div>
+      <div class="supply-hint">تم تعبئة الكمية المستلمة ومعدل الاستخدام من آخر سجل تلقائيًا؛ راجعها وعدّلها عند الحاجة، وأدخل رقم الموافقة الجديدة.</div>
       ${supplyMarkup(edit)}
       <div class="calculated" id="previewDate">الصرف القادم تلقائيًا: —</div>
       <label class="checkbox-line"><input type="checkbox" id="overrideCheck">تحديد تاريخ الصرف القادم يدويًا</label>
       <div id="overrideArea" hidden>${formField('تاريخ الصرف القادم المحدد','manualNext','','date')}</div>
-      <div class="two">${formField('رقم الموافقة الجديدة (اختياري)','approvalNo','','text','maxlength="80"')}${formField('وصف الكمية (اختياري)','quantity',m.quantity||'','text','maxlength="80" placeholder="يُعبّأ تلقائيًا من العلب"')}</div>
+      ${formField('رقم الموافقة الجديدة (اختياري)','approvalNo','','text','maxlength="80"')}
       <div class="field"><label>ملاحظات (اختياري)</label><textarea name="comment" maxlength="250" placeholder="مثال: تم الاستلام من الصيدلية"></textarea></div>
+      ${attachmentMarkup()}
       <div class="formactions"><button class="btn btn-soft" type="button" data-action="close">إلغاء</button><button class="btn btn-primary" type="submit">تأكيد الصرف</button></div>
     </form>`,'dispense',id);
     const f=$('#dispenseForm');f.addEventListener('input',updateDispensePreview);f.addEventListener('change',updateDispensePreview);
@@ -547,19 +555,19 @@
       if(!current.history.some(h=>h.date===current.last&&(h.kind==='dispense'||/تم الاستلام|صرف سابق|تاريخ الصرف السابق/.test(h.note))))current.history.push({date:current.last,kind:'baseline',approvalNo:current.approvalNo||'',quantity:current.quantity||'',quantityUnit:current.quantityUnit||'',note:'آخر صرف مسجل قبل التحديث'});
       const approvalNo=form.elements.approvalNo.value.trim().slice(0,80),comment=form.elements.comment.value.trim().slice(0,250);
       const countText=mode==='quantity'?`${x.packCount} علبة × ${x.packSize} ${x.packUnit}`:'';
-      const quantity=(form.elements.quantity.value.trim()||countText).slice(0,80);
+      const quantity=(countText||'').slice(0,80);
       const due=manualNext||(mode==='quantity'?calculated.next:addDuration(s,qty,form.elements.unit.value));
       current.history.push({date:s,kind:'dispense',approvalNo,quantity,packCount:mode==='quantity'?x.packCount:null,
          packSize:mode==='quantity'?x.packSize:null,unitsPerInterval:mode==='quantity'?x.unitsPerInterval:null,
-         intervalDays:mode==='quantity'?x.intervalDays:null,packUnit:mode==='quantity'?x.packUnit:'',nextDue:due,note:comment});
+         intervalDays:mode==='quantity'?x.intervalDays:null,packUnit:mode==='quantity'?x.packUnit:'',nextDue:due,note:comment,imageData:form.elements.attachmentData.value});
       current.history=current.history.slice(-100);
       current.last=s;current.qty=mode==='quantity'?calculated.days:qty;current.unit=mode==='quantity'?'days':form.elements.unit.value;
       current.supplyMode=mode;
       if(mode==='quantity')Object.assign(current,x);else current.packCount=null;
-      current.manualNext=manualNext;current.approvalNo=approvalNo;current.quantity=quantity;current.quantityUnit='';
+      current.manualNext=manualNext;current.approvalNo=approvalNo;current.quantity=quantity;current.quantityUnit='';current.suppressCurrentHistory=false;
       if(comment)current.note=[current.note,comment].filter(Boolean).join(' | ').slice(0,500);
       save();closeModal();render();toast('تم تسجيل الصرف: الموعد القادم '+dateText(nextDate(current)));
-    });updateDispensePreview();
+    });wireAttachment(f);updateDispensePreview();
   }
   function updateDispensePreview(){const f=$('#dispenseForm');if(!f)return;
     const override=$('#overrideCheck').checked;$('#overrideArea').hidden=!override;f.elements.manualNext.required=override;
@@ -610,6 +618,7 @@
       <label class="checkbox-line"><input type="checkbox" id="labNewOverride">تحديد الموعد القادم يدويًا</label>
       <div id="labNewOverrideArea" hidden>${formField('موعد المتابعة القادم','manualNext','','date')}</div>
       <div class="field"><label for="labApprovalComment">ملاحظة (اختياري)</label><textarea id="labApprovalComment" name="comment" maxlength="250" placeholder="مثال: نوع التحاليل المعتمدة"></textarea></div>
+      ${attachmentMarkup()}
       <div class="lab-warning">حفظ الموافقة لا يعني أن التحليل أُجري؛ هذا سجل للموافقات والمتابعة فقط.</div>
       <div class="formactions"><button type="button" class="btn btn-soft" data-action="close">إلغاء</button><button type="submit" class="btn btn-primary">تأكيد الموافقة</button></div>
     </form>`,'labapproval',id);
@@ -622,11 +631,11 @@
       lab.history=lab.history||[];
       if(!lab.history.some(h=>h.date===lab.last&&(h.kind==='approval'||/موافقة سابقة/.test(h.note))))lab.history.push({date:lab.last,kind:'baseline',approvalNo:lab.approvalNo||'',quantity:lab.quantity||'',note:'موافقة مسجلة قبل التحديث'});
       const approvalNo=x.elements.approvalNo.value.trim().slice(0,60),quantity=x.elements.quantity.value.trim().slice(0,80);
-      lab.history.push({date:last,kind:'approval',approvalNo,quantity,note:x.elements.comment.value.trim().slice(0,250)});lab.history=lab.history.slice(-100);
+      lab.history.push({date:last,kind:'approval',approvalNo,quantity,note:x.elements.comment.value.trim().slice(0,250),imageData:x.elements.attachmentData.value});lab.history=lab.history.slice(-100);lab.suppressCurrentHistory=false;
       lab.last=last;lab.approvalNo=approvalNo;lab.quantity=quantity;lab.manualNext=man;
       if(x.elements.comment.value.trim())lab.note=[lab.note,x.elements.comment.value.trim()].filter(Boolean).join(' | ').slice(0,500);
       save();closeModal();render();toast('تم تسجيل الموافقة وحساب الموعد بعد ٣ أشهر');
-    });
+    });wireAttachment(f);
   }
   function settingForm(){
     const lab=isLabs();
@@ -637,14 +646,14 @@
         <div class="hint">التطبيق المحلي لا يرسل تنبيهات بنفسه وهو مغلق. تذكيرات التقويم تتطلب استيراد ملف ICS، وعند تغيير موعد يلزم تحديث الحدث القديم.</div>
       </section>
       <section class="panel"><h3>💾 حفظ بياناتك</h3>
-        <p>البيانات تحفظ محليًا إن سمح بذلك عارض الملفات على الآيفون. احتفظ بنسخة JSON خارج التطبيق أو بنصها في «الملاحظات» قبل الانتقال إلى ملف HTML جديد.</p>
+        <p>البيانات والصور المرفقة تحفظ محليًا إن سمح بذلك عارض الملفات على الآيفون. احتفظ بنسخة JSON خارج التطبيق أو بنصها في «الملاحظات» قبل الانتقال إلى ملف HTML جديد.</p>
         <div class="actions"><button type="button" class="btn btn-primary small" data-action="backup">حفظ نسخة احتياطية</button><button type="button" class="btn btn-outline small" data-action="import">استيراد JSON</button><button type="button" class="btn btn-outline small" data-action="importtext">استيراد نص نسخة</button></div>
         <div class="hint">${lab?'هذه متابعة لموافقات التحاليل، وليست تحديدًا طبيًا لمواعيد الفحص.':'حساب التغطية تقديري بناء على الكميات ومعدل الاستخدام الموثّق، وليس تعديلًا للجرعة الموصوفة.'}</div>
       </section></div>`;
     showModal('إعدادات التطبيق',`<form id="settingsForm" class="formgrid"><div class="field"><label for="settingDays">متى يعتبر الموعد قريبًا؟</label><select id="settingDays" name="days">${[3,5,7,10,14,21].map(d=>`<option value="${d}" ${notificationDays===d?'selected':''}>خلال ${d} أيام</option>`).join('')}</select><span class="helper">يغيّر التمييز البرتقالي للأدوية والتحاليل.</span></div><div class="formactions"><button type="button" class="btn btn-soft" data-action="close">إلغاء</button><button type="submit" class="btn btn-primary">حفظ الإعدادات</button></div></form>${settingsPanels}`, 'settings');
     $('#settingsForm').addEventListener('submit',e=>{e.preventDefault();notificationDays=Number($('#settingDays').value);save();closeModal();render();toast('تم تحديث الإعدادات')});
   }
-  function guide(){showModal('طريقة الاستخدام',`<div style="line-height:2;color:#516575;font-size:14px"><p><b>سجل الدواء أو التحليل:</b> اضغط على البطاقة نفسها لعرض تواريخ الصرف أو الموافقة ورقمها والكمية، واضغط «تعديل السجل» لتصحيح أي عملية سابقة.</p><p><b>التحاليل:</b> افتح تبويب «التحاليل»، أضف اسم التحليل وآخر موافقة، ثم استخدم «تسجيل موافقة جديدة» بعد أي موافقة لاحقة. الموعد القادم محسوب بعد ٣ أشهر، مع إمكانية تعديله يدويًا. لا يُقصد به موعد إجراء التحليل الطبي.</p><p><b>١. تعديل أي دواء:</b> اضغط علامة القلم، وحدد تاريخ آخر صرف، واختر الحساب بالكمية (العلب × الحبات ÷ الاستخدام) أو بالمدة اليدوية. سيظهر الموعد تلقائيًا.</p><p><b>٢. بعد استلام الدواء:</b> اضغط «تسجيل صرف جديد» وستظهر آخر كميات ومعدل الاستخدام المسجل تلقائيًا؛ راجعها وأكّد الاستلام وتاريخ الصرف؛ يُحتسب الموعد القادم ويحفظ سجل الصرف. بعض الأدوية مثل الأقلام تحتاج تأكيد عدد الجرعات في القلم.</p><p><b>٣. التنبيهات:</b> اضغط «أضف للتقويم» ثم اختر مشاركة ملف المواعيد أو حفظ ICS. افتح الملف وأضف الأحداث لتقويم الهاتف مع التذكيرات. إذا لم يظهر خيار الإضافة على الآيفون، أرسل الملف لنفسك بالبريد وافتحه من تطبيق البريد، أو أضف المواعيد يدويًا للتقويم.</p><p><b>٤. عند تحديث موعد الصرف:</b> حدّث الحدث السابق في التقويم أو احذفه قبل استيراد الملف الجديد، حتى ما تصلك تنبيهات قديمة أو مكررة.</p><p><b>٥. النسخة الاحتياطية:</b> مشاركة ملف JSON وحفظه في «الملفات»، أو نسخ بيانات النسخة إلى «الملاحظات» ثم استيرادها بالنص.</p><p><b>٦. إضافة للشاشة الرئيسية:</b> إذا فتحت التطبيق من رابط ويب عبر Safari، اختر «مشاركة» ثم «إضافة إلى الشاشة الرئيسية». فتح ملف HTML من تطبيق الملفات قد لا يتيح الحفظ الدائم؛ لذلك الأفضل استخدام نسخة احتياطية أو استضافة الملف على رابط ثابت.</p></div><div class="formactions"><button class="btn btn-primary" type="button" data-action="close">فهمت</button></div>`, 'guide')}
+  function guide(){showModal('طريقة الاستخدام',`<div style="line-height:2;color:#516575;font-size:14px"><p><b>سجل الدواء أو التحليل:</b> اضغط على البطاقة نفسها لعرض تواريخ الصرف أو الموافقة ورقمها والكمية. يمكنك تعديل السجل أو حذفه وإرفاق صورة به؛ الصور تُضغط وتُحفظ ضمن النسخة الاحتياطية.</p><p><b>التحاليل:</b> افتح تبويب «التحاليل»، أضف اسم التحليل وآخر موافقة، ثم استخدم «تسجيل موافقة جديدة» بعد أي موافقة لاحقة. الموعد القادم محسوب بعد ٣ أشهر، مع إمكانية تعديله يدويًا. لا يُقصد به موعد إجراء التحليل الطبي.</p><p><b>١. تعديل أي دواء:</b> اضغط علامة القلم، وحدد تاريخ آخر صرف، واختر الحساب بالكمية (العلب × الحبات ÷ الاستخدام) أو بالمدة اليدوية. سيظهر الموعد تلقائيًا.</p><p><b>٢. بعد استلام الدواء:</b> اضغط «تسجيل صرف جديد» وستظهر الكمية المستلمة ومعدل الاستخدام من آخر سجل تلقائيًا؛ راجعها وعدّلها إن احتجت، ثم أكّد تاريخ الاستلام. يُحتسب الموعد القادم ويحفظ سجل الصرف. بعض الأدوية مثل الأقلام تحتاج تأكيد عدد الجرعات في القلم.</p><p><b>٣. التنبيهات:</b> اضغط «أضف للتقويم» ثم اختر مشاركة ملف المواعيد أو حفظ ICS. افتح الملف وأضف الأحداث لتقويم الهاتف مع التذكيرات. إذا لم يظهر خيار الإضافة على الآيفون، أرسل الملف لنفسك بالبريد وافتحه من تطبيق البريد، أو أضف المواعيد يدويًا للتقويم.</p><p><b>٤. عند تحديث موعد الصرف:</b> حدّث الحدث السابق في التقويم أو احذفه قبل استيراد الملف الجديد، حتى ما تصلك تنبيهات قديمة أو مكررة.</p><p><b>٥. النسخة الاحتياطية:</b> مشاركة ملف JSON وحفظه في «الملفات»، أو نسخ بيانات النسخة إلى «الملاحظات» ثم استيرادها بالنص.</p><p><b>٦. إضافة للشاشة الرئيسية:</b> إذا فتحت التطبيق من رابط ويب عبر Safari، اختر «مشاركة» ثم «إضافة إلى الشاشة الرئيسية». فتح ملف HTML من تطبيق الملفات قد لا يتيح الحفظ الدائم؛ لذلك الأفضل استخدام نسخة احتياطية أو استضافة الملف على رابط ثابت.</p></div><div class="formactions"><button class="btn btn-primary" type="button" data-action="close">فهمت</button></div>`, 'guide')}
   function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3300)}
   function download(text,name,mime){const blob=new Blob([text],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000)}
   // النسخة المحلية على iPhone قد ترفض التنزيل التقليدي وتُظهر رسالة نجاح مضللة.
@@ -1121,7 +1130,7 @@
           <label class="calc-option"><input type="radio" name="ap-mode-${i}" data-ap-mode="${i}" value="duration" ${packDefaults(m).packSize&&packDefaults(m).unitsPerInterval?'':'checked'}><span>حسب المدة</span></label>
         </div></div>
         <div data-ap-quantity="${i}" ${packDefaults(m).packSize&&packDefaults(m).unitsPerInterval?'':'hidden'}>
-          <div class="two"><div class="field"><label>العلب المستلمة فعليًا</label><input type="number" data-ap-packs="${i}" min="1" max="500" step="1" placeholder="موافقة ${r.qtyApproved??'؟'} علب، تأكد من الاستلام"></div><div class="field"><label>وحدات كل علبة</label><input type="number" data-ap-size="${i}" min="0.01" max="10000" step="any" value="${packDefaults(m).packSize}"></div></div>
+          <div class="two"><div class="field"><label>الكمية المستلمة</label><input type="number" data-ap-packs="${i}" min="1" max="500" step="1" placeholder="عدد العلب المستلمة فعليًا"></div><div class="field"><label>وحدات كل علبة</label><input type="number" data-ap-size="${i}" min="0.01" max="10000" step="any" value="${packDefaults(m).packSize}"></div></div>
           <div class="two"><div class="field"><label>الوحدات المستخدمة</label><input type="number" data-ap-use="${i}" min="0.01" step="any" value="${packDefaults(m).unitsPerInterval}"></div><div class="field"><label>كل كم يوم؟</label><input type="number" data-ap-period="${i}" min="1" max="365" step="1" value="${packDefaults(m).intervalDays}"></div></div>
           <div class="supply-hint" data-ap-preview="${i}">حدد العلب التي استلمتها؛ لا تُعد الموافقة إثباتًا للاستلام.</div>
         </div>
@@ -1208,7 +1217,7 @@
     // لصق النص داخل textarea يعمل بالطريقة الطبيعية، وتحليله لاحقاً بالزر.
   });
   $('#approvalFile').addEventListener('change',e=>{receiveApprovalImage(e.target.files?.[0]);e.target.value=''});
-  document.addEventListener('click',ev=>{const dl=ev.target.closest('#backupDownloadLink');if(dl){toast('طلبنا تنزيل ملف JSON. إذا لم يظهر في «الملفات»، استخدم المشاركة أو النسخ النصي.');return}const cat=ev.target.closest('[data-category]');if(cat){switchCategory(cat.dataset.category);return}const filter=ev.target.closest('[data-filter]');if(filter){activeFilter=activeFilter===filter.dataset.filter?'all':filter.dataset.filter;render();return}const btn=ev.target.closest('[data-action]');if(!btn){const card=ev.target.closest('[data-record-id]');if(card)showHistory(card.dataset.recordId,card.dataset.recordCategory);return}const action=btn.dataset.action,id=btn.dataset.id;if(action==='add'){if(isLabs())labForm();else medForm()}else if(action==='edithistory')editHistory(id,btn.dataset.historyCategory,Number(btn.dataset.hindex));else if(action==='labedit')labForm(id);else if(action==='labapprove')labApprovalForm(id);else if(action==='edit')medForm(id);else if(action==='dispense')dispenseForm(id);else if(action==='close')closeModal();else if(action==='settings')settingForm();else if(action==='guide')guide();else if(action==='backup')backup();else if(action==='sharebackup')shareBackup();else if(action==='copybackup')copyBackup();else if(action==='selectbackup')selectBackup();else if(action==='importtext')importTextForm();else if(action==='confirmimport')finishImport();else if(action==='cancelimport'){pendingImport=null;closeModal()}else if(action==='import')$('#importFile').click();else if(action==='calendar')calendar();else if(action==='approval')showApproval();else if(action==='closeapproval')closeApproval();else if(action==='pickapproval')$('#approvalFile').click();else if(action==='pasteapproval')pasteApproval();else if(action==='analyzeapproval')analyzeApproval();else if(action==='saveapproval')saveApproval();else if(action==='closecalendar')closeCalendar();else if(action==='sharecalendar')shareCalendar();else if(action==='copycalendar')copyCalendarList();else if(action==='downloadcalendar')toast('تم طلب حفظ الملف، لكن قد يمنع تطبيق «الملفات» التنزيل. تحقق من موقع الحفظ أو جرّب المشاركة.');else if(action==='imagepage')imagePage();else if(action==='shareimage')shareImage();else if(action==='closeimage')closeImageView();else if(action==='onecalendar')calendar([id]);else if(action==='labdelete'){const lab=labs.find(x=>x.id===editing);if(lab&&confirm(`هل تريد حذف التحليل «${lab.name}» من القائمة؟`)){labs=labs.filter(x=>x.id!==editing);save();closeModal();render();toast('تم حذف التحليل')}}else if(action==='delete'){const m=medicines.find(x=>x.id===editing);if(m&&confirm(`هل تريد حذف «${m.name}» من القائمة؟`)){medicines=medicines.filter(x=>x.id!==editing);save();closeModal();render();toast('تم حذف الدواء')}}});
+  document.addEventListener('click',ev=>{const dl=ev.target.closest('#backupDownloadLink');if(dl){toast('طلبنا تنزيل ملف JSON. إذا لم يظهر في «الملفات»، استخدم المشاركة أو النسخ النصي.');return}const cat=ev.target.closest('[data-category]');if(cat){switchCategory(cat.dataset.category);return}const filter=ev.target.closest('[data-filter]');if(filter){activeFilter=activeFilter===filter.dataset.filter?'all':filter.dataset.filter;render();return}const btn=ev.target.closest('[data-action]');if(!btn){const card=ev.target.closest('[data-record-id]');if(card)showHistory(card.dataset.recordId,card.dataset.recordCategory);return}const action=btn.dataset.action,id=btn.dataset.id;if(action==='add'){if(isLabs())labForm();else medForm()}else if(action==='edithistory')editHistory(id,btn.dataset.historyCategory,Number(btn.dataset.hindex));else if(action==='deletehistory')deleteHistory(id,btn.dataset.historyCategory,Number(btn.dataset.hindex));else if(action==='labedit')labForm(id);else if(action==='labapprove')labApprovalForm(id);else if(action==='edit')medForm(id);else if(action==='dispense')dispenseForm(id);else if(action==='close')closeModal();else if(action==='settings')settingForm();else if(action==='guide')guide();else if(action==='backup')backup();else if(action==='sharebackup')shareBackup();else if(action==='copybackup')copyBackup();else if(action==='selectbackup')selectBackup();else if(action==='importtext')importTextForm();else if(action==='confirmimport')finishImport();else if(action==='cancelimport'){pendingImport=null;closeModal()}else if(action==='import')$('#importFile').click();else if(action==='calendar')calendar();else if(action==='approval')showApproval();else if(action==='closeapproval')closeApproval();else if(action==='pickapproval')$('#approvalFile').click();else if(action==='pasteapproval')pasteApproval();else if(action==='analyzeapproval')analyzeApproval();else if(action==='saveapproval')saveApproval();else if(action==='closecalendar')closeCalendar();else if(action==='sharecalendar')shareCalendar();else if(action==='copycalendar')copyCalendarList();else if(action==='downloadcalendar')toast('تم طلب حفظ الملف، لكن قد يمنع تطبيق «الملفات» التنزيل. تحقق من موقع الحفظ أو جرّب المشاركة.');else if(action==='imagepage')imagePage();else if(action==='shareimage')shareImage();else if(action==='closeimage')closeImageView();else if(action==='onecalendar')calendar([id]);else if(action==='labdelete'){const lab=labs.find(x=>x.id===editing);if(lab&&confirm(`هل تريد حذف التحليل «${lab.name}» من القائمة؟`)){labs=labs.filter(x=>x.id!==editing);save();closeModal();render();toast('تم حذف التحليل')}}else if(action==='delete'){const m=medicines.find(x=>x.id===editing);if(m&&confirm(`هل تريد حذف «${m.name}» من القائمة؟`)){medicines=medicines.filter(x=>x.id!==editing);save();closeModal();render();toast('تم حذف الدواء')}}});
   document.addEventListener('keydown',e=>{const card=e.target.closest?.('[data-record-id]');if(card&&e.target===card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showHistory(card.dataset.recordId,card.dataset.recordCategory)}});
   $('#importFile').addEventListener('change',e=>importData(e.target.files?.[0]));$('#search').addEventListener('input',render);
   $('#modal').addEventListener('click',e=>{if(e.target===$('#modal'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#calView').hidden)closeCalendar();else if(e.key==='Escape'&&!$('#approvalView').hidden)closeApproval();else if(e.key==='Escape'&&!$('#imageView').hidden)closeImageView();else if(e.key==='Escape'&&!$('#modal').hidden)closeModal()});
